@@ -2,15 +2,16 @@
 
 const INITAL_STATE = {
   signIN: null,
-  signUP: null
+  isSignedIN: false,
+  userDetails: null
 };
 
 const AuthReducer = (state = INITAL_STATE, action) => {
   switch (action.type) {
     case "SIGN_IN":
       return { ...state, signIn: action.payload };
-    case "SIGN_UP":
-      return { ...state, signUp: action.payload };
+    case "SIGNED_IN":
+      return { ...state, isSignedIN: action.payload };
     default:
       return state;
   }

@@ -1,12 +1,33 @@
 import React from "react";
-import { connect } from "react-redux";
-import { signUp } from "../../action";
-import { Link } from "react-router-dom";
 import Header from "../Header";
-import Modal from "../Modal";
+import History from "../../History";
+import supabase from "../../supabase/Supabase";
 
 class SignUp extends React.Component {
-  state = { username: "", email: "", password: "", error: null };
+  state = {
+    username: "",
+    email: "",
+    password: "",
+    confirm: "",
+    error: ""
+    // supabaseErr: null
+  };
+
+  signUpAuth = async (username, password, email) => {
+    try {
+      const { error } = await supabase.auth.signUp({
+        username,
+        email,
+        password
+      });
+      if (error) {
+        throw error;
+        // this.setState({ supabaseErr: error });
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
 
   validatePassword = () => {
     if (this.state.password.length <= 5) {
@@ -22,11 +43,32 @@ class SignUp extends React.Component {
   onPasswordChange = e => {
     this.setState({ password: e.target.value });
   };
+  confirmPassword = e => {
+    this.setState({ confirm: e.target.value });
+  };
+
+  onChecked = () => {
+    return <div></div>;
+  };
+  renderError = () => {
+    return (
+      <p className='text-red-500 text-xs italic pt-2'>{`${this.state.error}`}</p>
+    );
+  };
 
   onUserSubmit = e => {
     e.preventDefault();
-    const { username, email, password } = this.state;
-    console.log(this.props.signUp(username, email, password));
+    const { username, email, password, confirm } = this.state;
+
+    if (confirm !== this.state.password) {
+      this.setState({ error: "Password and confirm password must match." });
+    } else if (password.length <= 5) {
+      this.setState({ error: "Password must be more than 5 characters." });
+    } else {
+      this.signUpAuth(username, email, password);
+
+      History.push("/confirm");
+    }
   };
   render() {
     return (
@@ -35,20 +77,26 @@ class SignUp extends React.Component {
           <Header signed='Sign In' />
         </div>
         {/* <Modal /> */}
-        <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
-          <div className='max-w-md w-full space-y-8'>
-            <div>
-              {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow"/> */}
-              <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-                Sign Up
-              </h2>
-              <p className='mt-2 text-center text-sm text-gray-600'>
-                {/* Or
-            <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
-              start your 14-day free trial
-            </a> */}
-              </p>
-            </div>
+        <div className='min-h-screen flex items-center justify-evenly py-12 px-4 sm:px-6 lg:px-8'>
+          {/* <div className='w-96 h-96'>
+            <img
+              className='mx-auto h-12 w-auto'
+              src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
+              alt='Workflow'
+            />
+            <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+              Sign Up
+            </h2>
+            <p className='mt-2 text-center text-sm text-gray-600'>
+              Or
+              <a
+                href='/'
+                className='font-medium text-indigo-600 hover:text-indigo-500'>
+                start your 14-day free trial
+              </a>
+            </p>
+          </div> */}
+          <div className='max-w-md w-full space-y-8 h-96 px-4'>
             <form
               className='mt-8 space-y-6'
               action='#'
@@ -57,15 +105,16 @@ class SignUp extends React.Component {
               <div className='rounded-md shadow-sm -space-y-px '>
                 <div>
                   <label htmlFor='user-name' className='sr-only'>
-                    User Name
+                    Username
                   </label>
                   <input
                     onChange={this.onUserNameChange}
                     id='user-name'
                     name='user-name'
                     type='text'
+                    autoComplete='off'
                     className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                    placeholder='User Name'
+                    placeholder='Full Name'
                   />
                 </div>
                 <div>
@@ -77,8 +126,7 @@ class SignUp extends React.Component {
                     id='email-address'
                     name='email'
                     type='email'
-                    autoComplete='email'
-                    required
+                    autoComplete='off'
                     className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                     placeholder='Email address'
                   />
@@ -92,12 +140,28 @@ class SignUp extends React.Component {
                     id='password'
                     name='password'
                     type='password'
-                    autoComplete='current-password'
+                    autoComplete='off'
                     required
                     className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                     placeholder='Password'
                   />
                 </div>
+                <div>
+                  <label htmlFor='password' className='sr-only'>
+                    confirm password
+                  </label>
+                  <input
+                    onChange={this.confirmPassword}
+                    id='confirm-password'
+                    name='confirm-password'
+                    type='password'
+                    autoComplete='current-password'
+                    required
+                    className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                    placeholder='Confirm password'
+                  />
+                </div>
+                {this.renderError()}
               </div>
 
               <div className='flex items-center justify-between'>
@@ -154,4 +218,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default connect(null, { signUp })(SignUp);
+export default SignUp;

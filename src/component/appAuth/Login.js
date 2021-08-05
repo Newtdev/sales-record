@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { signIN } from "../../action";
+import { signIN, isSignedIN } from "../../action";
 import Header from "../Header";
 import propTypes from "prop-types";
+import supabase from "../../supabase/Supabase";
+import Dashboard from "../sales/Dashboard";
+import History from "../../History";
 
 class Login extends React.Component {
   state = { email: "", password: "" };
@@ -18,19 +21,13 @@ class Login extends React.Component {
 
   onUserSubmit = e => {
     const { email, password } = this.state;
-
     e.preventDefault();
-    // this.props.signIN(email, password);
-    console.log(this.props.signIN(email, password));
-  };
+    this.props.signIN(email, password);
 
-  renderError = () => {
-    if (this.props.signIn && this.props.error.error) {
-      return (
-        <p className='text-red-500 text-xs italic'>{`${this.props.error.error.message}`}</p>
-      );
-    } else {
+    if (!this.props.signed) {
       return null;
+    } else if (this.props.signed.session) {
+      History.push(`/dashboard/${this.props.signed.user.id}`);
     }
   };
 
@@ -79,10 +76,15 @@ class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.onPasswordChange}
                 />
-                {this.renderError()}
+                {/* <p className='text-red-500 text-xs italic'>
+                  {this.props.error
+                    ? "error"
+                    : `${this.props.error.error.message}`}
+                </p> */}
               </div>
               <div className='flex items-center justify-between'>
                 <button
+                  name='Sign In'
                   className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
                   type='submit'>
                   Sign In
@@ -98,7 +100,10 @@ class Login extends React.Component {
                 <Link
                   className='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 mt-4'
                   to='/SignUp'>
-                  Sign up here?
+                  <span className='font-bold text-sm text-gray-700 mr-2'>
+                    No Account?
+                  </span>
+                  Register here
                 </Link>
               </div>
             </form>
@@ -110,11 +115,14 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { error: state.AuthReducer.signIn };
+  return {
+    error: state.AuthReducer.signIn,
+    signed: state.AuthReducer.signIn
+  };
 };
 
 Login.propTypes = {
   signIN: propTypes.any
 };
 
-export default connect(mapStateToProps, { signIN })(Login);
+export default connect(mapStateToProps, { signIN, isSignedIN })(Login);
