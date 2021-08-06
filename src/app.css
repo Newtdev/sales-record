@@ -4,4 +4,14 @@
 
 .background {
   background-image: url(./assets/fakurian-design-E8Ufcyxz514-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.side-image {
+  background: url(./assets/gradienta-m_7p45JfXQo-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
