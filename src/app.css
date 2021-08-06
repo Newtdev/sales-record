@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.background {
+  background-image: url(./assets/fakurian-design-E8Ufcyxz514-unsplash.jpg);
+}

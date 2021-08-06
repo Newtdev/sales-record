@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import { signIN, isSignedIN } from "../../action";
 import Header from "../Header";
 import propTypes from "prop-types";
-import supabase from "../../supabase/Supabase";
-import Dashboard from "../sales/Dashboard";
 import History from "../../History";
+import GoogleAuth from "./GoogleAuth";
 
 class Login extends React.Component {
   state = { email: "", password: "" };
@@ -46,6 +45,30 @@ class Login extends React.Component {
             <form
               className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
               onSubmit={this.onUserSubmit}>
+              <div className='h-24 w-full flex flex-col items-center'>
+                <h2 className='text-center text-2xl font-extrabold text-indigo-800 mb-1'>
+                  Login
+                </h2>
+                {/* <div> */}
+                <Link
+                  className='inline-block font-bold text-sm text-blue-500 hover:text-blue-800'
+                  to='/SignUp'>
+                  <span className='font-light text-md text-gray-500 mr-2'>
+                    Don't have an account?
+                  </span>
+                  Sign up
+                </Link>
+                {/* </div> */}
+              </div>
+
+              <div className='h-14'>
+                <GoogleAuth />
+              </div>
+              <div className='w-full h-8 flex justify-center items-center '>
+                <span class='inline-block h-0.5 w-full bg-gray-300 rounded-3xl'></span>
+                <p className='font-bold px-2 text-gray-600'>Or</p>
+                <span class='inline-block h-0.5 w-full bg-gray-300 rounded-3xl'></span>
+              </div>
               <div className='mb-4'>
                 <label
                   className='block text-gray-700 text-sm font-bold mb-2'
@@ -85,26 +108,16 @@ class Login extends React.Component {
               <div className='flex items-center justify-between'>
                 <button
                   name='Sign In'
-                  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                  className='bg-indigo-800 hover:bg-indigo-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
                   type='submit'>
-                  Sign In
+                  Login
                 </button>
                 <a
-                  className='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
+                  className='inline-block align-baseline font-bold text-sm text-indigo-200 hover:text-blue-800'
                   href='/'>
                   {" "}
                   Forgot Password?
                 </a>
-              </div>
-              <div>
-                <Link
-                  className='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 mt-4'
-                  to='/SignUp'>
-                  <span className='font-bold text-sm text-gray-700 mr-2'>
-                    No Account?
-                  </span>
-                  Register here
-                </Link>
               </div>
             </form>
           </div>

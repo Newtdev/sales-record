@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Header";
 import History from "../../History";
 import supabase from "../../supabase/Supabase";
+import business from "../../assets/Business.svg";
 
 class SignUp extends React.Component {
   state = {
@@ -73,36 +74,32 @@ class SignUp extends React.Component {
   render() {
     return (
       <>
-        <div>
-          <Header signed='Sign In' />
-        </div>
         {/* <Modal /> */}
-        <div className='min-h-screen flex items-center justify-evenly py-12 px-4 sm:px-6 lg:px-8'>
-          {/* <div className='w-96 h-96'>
+        <div className='min-h-screen flex sm:items-center justify-evenly flex-wrap sm:px-6 lg:px-8 background'>
+          <div>
+            <Header signed='Sign In' />
+          </div>
+          <div className='w-1/2 h-full hidden sm:block'>
             <img
-              className='mx-auto h-12 w-auto'
-              src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
-              alt='Workflow'
+              src={business}
+              alt='business svg'
+              className='mx-auto h-full w-auto'
             />
-            <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-              Sign Up
-            </h2>
-            <p className='mt-2 text-center text-sm text-gray-600'>
-              Or
-              <a
-                href='/'
-                className='font-medium text-indigo-600 hover:text-indigo-500'>
-                start your 14-day free trial
-              </a>
-            </p>
-          </div> */}
-          <div className='max-w-md w-full space-y-8 h-96 px-4'>
+          </div>
+          <div className='max-w-sm w-full space-y-8 h-1/2 py-10 px-4 bg-white shadow-2xl '>
             <form
               className='mt-8 space-y-6'
               action='#'
               onSubmit={this.onUserSubmit}>
+              <h2 className='text-center text-lg font-extrabold text-gray-900'>
+                Sign Up with{" "}
+                <span className='text-3xl font-extrabold text-indigo-800'>
+                  WDS
+                </span>
+              </h2>
+
               <input type='hidden' name='remember' value='true' />
-              <div className='rounded-md shadow-sm -space-y-px '>
+              <div className='rounded-md shadow-sm -space-y-px'>
                 <div>
                   <label htmlFor='user-name' className='sr-only'>
                     Username

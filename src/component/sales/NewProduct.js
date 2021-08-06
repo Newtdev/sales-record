@@ -4,6 +4,7 @@ import Button from "../Button";
 
 const NewProduct = props => {
   const renderInput = ({ input, label, meta }) => {
+    console.log(meta);
     return (
       <div>
         <label className='block text-sm font-medium text-gray-700 mt-2'>
@@ -19,7 +20,7 @@ const NewProduct = props => {
   };
 
   const sumbitValues = values => {
-    onSubmit(values);
+    console.log(values);
   };
   return (
     <div className='w-full h-screen flex justify-center items-center bg-gray-800'>
@@ -38,7 +39,7 @@ const NewProduct = props => {
                 label='Product Name'
                 component={renderInput}
                 type='text'
-                name='product-name'
+                name='productName'
                 id='product-name'
               />
             </div>
@@ -48,7 +49,7 @@ const NewProduct = props => {
                 label='Supplied Quantity'
                 component={renderInput}
                 type='text'
-                name='supplied-quantity'
+                name='suppliedQuantity'
                 id='supplied'
               />
             </div>
@@ -58,7 +59,7 @@ const NewProduct = props => {
                 label='Cost Price'
                 component={renderInput}
                 type='text'
-                name='cost-price'
+                name='costPrice'
                 id='cost'
               />
             </div>
@@ -67,7 +68,7 @@ const NewProduct = props => {
               <Field
                 label='Selling Price'
                 type='text'
-                name='selling-price'
+                name='sellingPrice'
                 component={renderInput}
                 id='selling'
               />
@@ -80,6 +81,25 @@ const NewProduct = props => {
   );
 };
 
+const validate = values => {
+  const errors = {};
+  if (!values.productName) {
+    errors.productName = "Product Name is required";
+  }
+  if (!values.suppliedQuantity) {
+    errors.suppliedQuantity = "Product Quantity is required";
+  }
+  if (!values.costPrice) {
+    errors.costPrice = " Cost Price is required";
+  }
+  if (!values.sellingPrice) {
+    errors.sellingPrice = "Selling Price is required";
+  } else {
+    return errors;
+  }
+};
+
 export default reduxForm({
-  form: "CREATE_PRODUCT"
+  form: "CREATE_PRODUCT",
+  validate
 })(NewProduct);

@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 const Header = props => {
   const URL = props.signed ? "/" : "/Signup";
   return (
-    <div className='h-14 max-w-screen-lg '>
-      <div className=' h-full w-screen flex justify-between items-center'>
-        <div className='h-full w-32 ml-4 flex items-center'>
-          <span className='text-2xl text-center'>Wares Daily</span>
+    <div className='h-14 w-screen shadow-sm'>
+      <div className=' h-full w-full sm:px-16 mx-auto flex justify-between items-center'>
+        <div className='h-full w-32 ml-10 flex items-center'>
+          <span className='text-3xl font-extrabold text-white'>WDS</span>
         </div>
-        <div className='mr-10'>
+        <div className='mr-5'>
           <Link
             to={URL}
             href='#'
