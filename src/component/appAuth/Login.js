@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { signIN, isSignedIN } from "../../action";
+import { signIN } from "../../action";
 import Header from "../Header";
 import propTypes from "prop-types";
 import History from "../../History";
@@ -9,7 +9,7 @@ import GoogleAuth from "./GoogleAuth";
 import business from "../../assets/Business.svg";
 
 class Login extends React.Component {
-  state = { email: "", password: "" };
+  state = { email: "", password: "", error: "" };
 
   onEmailChange = e => {
     this.setState({ email: e.target.value });
@@ -19,25 +19,31 @@ class Login extends React.Component {
     this.setState({ password: e.target.value });
   };
 
-  onUserSubmit = e => {
-    const { email, password } = this.state;
-    e.preventDefault();
-    this.props.signIN(email, password);
-
-    if (!this.props.signed) {
+  renderErrors = () => {
+    if (this.props.error.error) {
+      this.setState({ error: this.props.error.error.message });
+      return <p className='text-red-500 text-xs italic'>{this.state.error}</p>;
+    } else {
       return null;
-    } else if (this.props.signed.session) {
-      History.push(`/dashboard/${this.props.signed.user.id}`);
     }
   };
 
+  onUserSubmit = e => {
+    const { email, password } = this.state;
+    e.preventDefault();
+
+    if (!this.props.signed) {
+      return null;
+    }
+    this.props.signIN(email, password);
+  };
+
   render() {
-    console.log(this.props);
     const errborder = this.props.error ? "border-red-500" : "";
     return (
       <div className='h-screen side-image overflow-hidden'>
         <div>
-          <Header signUp='Sign Up' />
+          <Header />
         </div>
         <div className='h-full flex justify-evenly items-center'>
           <div className='w-1/2 hidden white sm:block'>
@@ -56,7 +62,6 @@ class Login extends React.Component {
                   <h2 className='text-center text-2xl font-extrabold text-indigo-800 mb-1'>
                     WDS
                   </h2>
-                  {/* <div> */}
                   <Link
                     className='inline-block font-bold text-sm text-blue-500 hover:text-blue-800'
                     to='/SignUp'>
@@ -65,7 +70,6 @@ class Login extends React.Component {
                     </span>
                     Sign up
                   </Link>
-                  {/* </div> */}
                 </div>
 
                 <div className='h-14'>
@@ -83,7 +87,7 @@ class Login extends React.Component {
                     Email
                   </label>
                   <input
-                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                    className={`shadow appearance-none border ${errborder} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                     id='email'
                     type='email'
                     placeholder='Your Email Address'
@@ -106,11 +110,11 @@ class Login extends React.Component {
                     value={this.state.password}
                     onChange={this.onPasswordChange}
                   />
-                  <p className='text-red-500 text-xs italic'>
-                    {!this.props.error
+                  {/* <p className='text-red-500 text-xs italic'>
+                    {!this.props.error.error
                       ? ""
                       : `${this.props.error.error.message}`}
-                  </p>
+                  </p> */}
                 </div>
                 <div className='flex items-center sm:justify-between'>
                   <button
@@ -137,8 +141,8 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    error: state.AuthReducer.signIn,
-    signed: state.AuthReducer.signIn
+    error: state.AuthReducer.signIn
+    // signed: state.AuthReducer.signIn
   };
 };
 
@@ -146,4 +150,4 @@ Login.propTypes = {
   signIN: propTypes.any
 };
 
-export default connect(mapStateToProps, { signIN, isSignedIN })(Login);
+export default connect(mapStateToProps, { signIN })(Login);

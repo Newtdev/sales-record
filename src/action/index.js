@@ -1,16 +1,9 @@
 import supabase from "../supabase/Supabase";
+import History from "../History";
 
-export const signIN = (email, password) => async dispatch => {
+export const signIN = (email, password) => async (dispatch, getState) => {
   const response = await supabase.auth.signIn({ email, password });
   dispatch({ type: "SIGN_IN", payload: response });
-};
 
-export const isSignedIN = () => dispatch => {
-  const response = supabase.auth.onAuthStateChange((event, session) => {});
-  dispatch({ type: "SIGNED_IN", payload: response });
+  History.push(`/dashboard/${response.user.id}`);
 };
-
-// export const user = () => dispatch => {
-//   const data = supabase.auth.user();
-//   dispatch({ type: "USER_DETAILS", payload: data });
-// };

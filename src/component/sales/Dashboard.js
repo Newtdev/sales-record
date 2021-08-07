@@ -24,8 +24,8 @@ const Dashboard = ({ session }) => {
   return (
     <div>
       <DashboardHeader />
-      <div className='dashbord-container w-screen h-screen bg-red-500'>
-        <div className='dashbord w-full h-full bg-green-200 flex justify-between items-center'>
+      <div className='dashboard-container w-screen h-screen bg-blue-900'>
+        <div className='dashbord w-full h-full flex justify-evenly items-center'>
           <Sidebar />
           <User />
         </div>

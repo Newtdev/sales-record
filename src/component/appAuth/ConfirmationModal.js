@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 
-const Modal = () => {
+const Modal = props => {
+  console.log(props);
   return ReactDOM.createPortal(
     <div
       className='fixed z-10 inset-0 overflow-y-auto'
@@ -70,7 +71,7 @@ const Modal = () => {
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>
                     Email confirmation link has been sent to your E-mail
-                    address. Please, confirm your details.
+                    address.
                   </p>
                 </div>
                 <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>

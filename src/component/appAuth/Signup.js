@@ -67,17 +67,15 @@ class SignUp extends React.Component {
       this.setState({ error: "Password must be more than 5 characters." });
     } else {
       this.signUpAuth(username, email, password);
-
       History.push("/confirm");
     }
   };
   render() {
     return (
       <>
-        {/* <Modal /> */}
         <div className='min-h-screen sm:px-6 lg:px-8 overflow-hidden background'>
           <div>
-            <Header signed='Sign In' />
+            <Header>Log in</Header>
           </div>
           <div className=' h-screen flex items-center justify-evenly flex-wrap '>
             <div className='w-1/2 h-full hidden sm:block'>
