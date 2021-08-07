@@ -5,5 +5,9 @@ export const signIN = (email, password) => async (dispatch, getState) => {
   const response = await supabase.auth.signIn({ email, password });
   dispatch({ type: "SIGN_IN", payload: response });
 
-  History.push(`/dashboard/${response.user.id}`);
+  if (response.error) {
+    console.log(response.error);
+  } else {
+    History.push(`/dashboard/${response.user.id}`);
+  }
 };

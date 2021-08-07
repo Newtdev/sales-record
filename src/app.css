@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
 .background {
   background-image: url(./assets/fakurian-design-E8Ufcyxz514-unsplash.jpg);
   background-size: cover;
@@ -14,4 +16,12 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+h2,
+p,
+label,
+span,
+button,
+a {
+  font-family: "Roboto", sans-serif;
 }

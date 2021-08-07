@@ -29,17 +29,19 @@ class Login extends React.Component {
   };
 
   onUserSubmit = e => {
-    const { email, password } = this.state;
     e.preventDefault();
-
-    if (!this.props.signed) {
-      return null;
+    const { email, password } = this.state;
+    if (!email) {
+      this.setState({ error: "Email must be provided" });
+    } else if (!password) {
+      this.setState({ error: "Password must be provided" });
+    } else {
+      this.props.signIN(email, password);
     }
-    this.props.signIN(email, password);
   };
 
   render() {
-    const errborder = this.props.error ? "border-red-500" : "";
+    const errborder = this.state.error ? "border-red-500" : "";
     return (
       <div className='h-screen side-image overflow-hidden'>
         <div>
