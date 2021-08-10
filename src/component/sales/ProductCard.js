@@ -1,5 +1,6 @@
 import React from "react";
-import Button from "../../component/Button";
+import ButtonLink from "../Link";
+import Button from "../sales/Button";
 
 const ProductCard = () => {
   return (
@@ -31,15 +32,15 @@ const ProductCard = () => {
           </span>
         </div>
         <div className='' id='button-container'>
-          <Button>Add quantity</Button>
+          <ButtonLink>Add Quantity</ButtonLink>
         </div>
         <div>
-          <Button>Edit Product</Button>
+          <ButtonLink>Edit Product</ButtonLink>
         </div>
         <div>
-          <button className='block w-full py-3 rounded px-4 align-baseline font-bold text-sm text-white bg-red-700 hover:bg-red-600 mt-4 shadow-lg'>
+          <Button className='block w-full py-3 rounded px-4 align-baseline font-bold text-sm text-white bg-red-700 hover:bg-red-600 mt-4 shadow-lg'>
             Delete
-          </button>
+          </Button>
         </div>
       </div>
     </div>

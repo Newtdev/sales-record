@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Button = ({ children }) => {
+const ButtonLink = ({ children }) => {
+  const buttonPath = () => {
+    if (children === "Edit Product") {
+      return "/product/edit";
+    }
+    if (children === "Add quantity") return "/product/add";
+  };
+
   return (
     <Link
       to='/'
@@ -12,4 +19,4 @@ const Button = ({ children }) => {
   );
 };
 
-export default Button;
+export default ButtonLink;

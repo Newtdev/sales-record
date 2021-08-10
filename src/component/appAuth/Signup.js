@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../Header";
 import History from "../../History";
 import supabase from "../../supabase/Supabase";
-import undraw from "../../assets/undraw.svg";
+import Business from "../../assets/Business.svg";
 
 class SignUp extends React.Component {
   state = {
@@ -61,7 +61,7 @@ class SignUp extends React.Component {
     e.preventDefault();
     const { username, email, password, confirm } = this.state;
 
-    if (confirm !== this.state.password) {
+    if (confirm !== password) {
       this.setState({ error: "Password and confirm password must match." });
     } else if (password.length <= 5) {
       this.setState({ error: "Password must be more than 5 characters." });
@@ -73,19 +73,19 @@ class SignUp extends React.Component {
   render() {
     return (
       <>
-        <div className='min-h-screen sm:px-6 lg:px-8 overflow-hidden background'>
+        <div className='max-h-screen sm:px-6 lg:px-8 overflow-hidden background'>
           <div>
             <Header>Log in</Header>
           </div>
           <div className=' h-screen flex items-center justify-evenly flex-wrap '>
             <div className='w-1/2 h-full hidden sm:block'>
               <img
-                src={undraw}
+                src={Business}
                 alt='business svg'
                 className='mx-auto h-full w-auto'
               />
             </div>
-            <div className='w-3/5 sm:w-1/2 flex justify-center items-center'>
+            <div className='w-72 sm:w-3/5 sm:w-1/2 flex justify-center items-center'>
               <div className='max-w-sm w-full space-y-8 h-1/2 py-10 px-4 bg-white shadow-2xl '>
                 <form
                   className='mt-8 space-y-6'

@@ -3,7 +3,7 @@ import Header from "../Header";
 
 const DashboardHeader = () => {
   return (
-    <div className='w-screen'>
+    <div className='w-screen bg-blue-900'>
       <div className='w-full h-14 mx-auto shadow-md flex items-center'>
         <Header></Header>
         <div className='w-56 h-12 ml-auto flex justify-around items-center mr-12'>

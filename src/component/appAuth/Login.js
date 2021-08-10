@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { signIN } from "../../action";
 import Header from "../Header";
 import propTypes from "prop-types";
-import History from "../../History";
 import GoogleAuth from "./GoogleAuth";
 import business from "../../assets/Business.svg";
 
@@ -32,7 +31,7 @@ class Login extends React.Component {
     e.preventDefault();
     const { email, password } = this.state;
     if (!email) {
-      this.setState({ error: "Email must be provided" });
+      this.setState({ error: "Email addresss must be provided" });
     } else if (!password) {
       this.setState({ error: "Password must be provided" });
     } else {
@@ -89,7 +88,7 @@ class Login extends React.Component {
                     Email
                   </label>
                   <input
-                    className={`shadow appearance-none border ${errborder} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                     id='email'
                     type='email'
                     placeholder='Your Email Address'
@@ -112,11 +111,9 @@ class Login extends React.Component {
                     value={this.state.password}
                     onChange={this.onPasswordChange}
                   />
-                  {/* <p className='text-red-500 text-xs italic'>
-                    {!this.props.error.error
-                      ? ""
-                      : `${this.props.error.error.message}`}
-                  </p> */}
+                  <p className='text-red-500 text-xs italic'>
+                    {this.state.error}
+                  </p>
                 </div>
                 <div className='flex items-center sm:justify-between'>
                   <button
@@ -125,12 +122,13 @@ class Login extends React.Component {
                     type='submit'>
                     Login
                   </button>
-                  <a
+                  <Link
+                    to='/password-reset'
                     className='inline-block align-baseline font-bold text-sm text-blue-700 hover:text-blue-800'
                     href='/'>
                     {" "}
                     Forgot Password?
-                  </a>
+                  </Link>
                 </div>
               </form>
             </div>

@@ -2,22 +2,22 @@ import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { signIN } from "../../action";
+import Button from "../sales/Button";
 
-import Button from "../Button";
-import { Link } from "react-router-dom";
 import DashboardHeader from "./DashboardHeader";
 import History from "../../History";
 
 const NewProduct = props => {
   const renderInput = ({ input, label, meta }) => {
-    const renderErrors = ({ touched, error }) => {
-      if (touched && error) {
+    const renderErrors = ({ error, touched }) => {
+      if (error && touched) {
         return <p className='text-red-500 text-xs italic pt-2'>{`${error}`}</p>;
       }
     };
+
     return (
       <div>
-        <label className='block text-sm font-medium text-gray-800 mt-2 my-1.5'>
+        <label className='block text-sm font-medium text-gray-800 mt-2 my-1.5 font-bold'>
           {label}
         </label>
         <input
@@ -33,9 +33,9 @@ const NewProduct = props => {
   const sumbitValues = values => {
     console.log(values);
   };
-  if (props.signIN) {
-    History.push("/");
-  }
+  // if (props.signIN) {
+  //   History.push("/");
+  // }
   return (
     <div className='w-screen h-screen bg-red-100 side-image overflow-hidden'>
       <div>
@@ -94,12 +94,16 @@ const NewProduct = props => {
               </div>
             </div>
             {/* <div> */}
-            <Button>Submit</Button>
-            <Link
-              to={`/dashboard/${props.user.id}`}
-              className='mt-3 w-full block rounded-md border border-gray-300 shadow-lg bg-white text-base py-2 px-4 mx-auto text-center font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 '>
+            <Button
+              type='submit'
+              className='mt-3 w-full block rounded-md shadow-lg bg-blue-600 text-base py-2 px-4 mx-auto text-center font-medium text-white hover:bg-blue-700 focus:outline-none'>
+              Submit
+            </Button>
+            <Button
+              onClick={() => History.goBack()}
+              className='mt-3 w-full block rounded-md border border-gray-300 shadow-lg bg-white text-base py-2 px-4 mx-auto text-center font-medium text-gray-700 hover:bg-gray-50 focus:outline-none '>
               Cancel
-            </Link>
+            </Button>
             {/* </div> */}
             {/* <Button>Cancel</Button> */}
           </div>
@@ -122,14 +126,18 @@ const validate = values => {
   }
   if (!values.sellingPrice) {
     errors.sellingPrice = "Selling Price is required";
-  } else {
-    return errors;
   }
+  return errors;
 };
 
 const mapStateToProps = state => {
   return { user: state.AuthReducer.signIn, session: state.AuthReducer.signIn };
 };
+
+// export default reduxForm({
+//   form: "CREATE_PRODUCT",
+//   validate
+// })(NewProduct);
 
 export default connect(mapStateToProps, { signIN })(
   reduxForm({
