@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import supabase from "../../supabase/Supabase";
 import { signIN } from "../../action";
-import { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import DashboardHeader from "./DashboardHeader";
 import User from "./User";
@@ -10,8 +8,7 @@ import History from "../../History";
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    const { session } = this.props.session;
-    if (!session) {
+    if (!this.props.session) {
       History.push("/");
     }
   }

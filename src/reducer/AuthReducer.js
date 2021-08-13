@@ -16,6 +16,8 @@ const AuthReducer = (state = INITAL_STATE, action) => {
       return { ...state, signOut: action.payload };
     case RESET_PASSWORD:
       return { ...state, reset_password: action.payload };
+    case NEW_PASSWORD:
+      return { ...state, NEW_PASSWORD: action.payload };
     default:
       return state;
   }

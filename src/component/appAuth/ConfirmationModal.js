@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 
 const Modal = props => {
-  console.log(props);
   return ReactDOM.createPortal(
     <div
       className='fixed z-10 inset-0 overflow-y-auto'

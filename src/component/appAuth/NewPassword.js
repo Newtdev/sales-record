@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { updatePassword } from "../../action";
+import { connect } from "react-redux";
 import ResetPage from "./ResetPage";
 
-const NewPassword = () => {
+const NewPassword = props => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setError] = useState("");
-
+  let [token, setToken] = useState(null);
   const Heading = "Reset Password";
+
+  useEffect(() => {
+    const res = props.location.hash.split("&")[0].slice(14);
+
+    setToken(res);
+  }, []);
 
   const submit = () => {
     if (confirmPassword !== password) {
@@ -14,7 +22,7 @@ const NewPassword = () => {
     } else if (password.length <= 5) {
       setError("Password must be more than 5 characters.");
     } else {
-      console.log(password, confirmPassword);
+      props.updatePassword(token, confirmPassword);
     }
   };
 
@@ -55,11 +63,12 @@ const NewPassword = () => {
       </React.Fragment>
     );
   };
+
   const button = (
     <button
       onClick={submit}
       type='button'
-      className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm'>
+      className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm'>
       Reset my password
     </button>
   );
@@ -70,4 +79,4 @@ const NewPassword = () => {
   );
 };
 
-export default NewPassword;
+export default connect(null, { updatePassword })(NewPassword);

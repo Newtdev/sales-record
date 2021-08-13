@@ -37,77 +37,77 @@ const NewProduct = props => {
   //   History.push("/");
   // }
   return (
-    <div className='w-screen h-screen bg-red-100 side-image overflow-hidden'>
+    <div className='w-screen min-h-screen bg-red-100 side-image overflow-hidden'>
       <div>
         {/* <Header></Header> */}
         <DashboardHeader />
       </div>
-      <div className='w-full h-screen flex justify-center items-start sm:items-center'>
-        <form
-          className='h-5/5 sm:h-4/5 w-80 mx-3 px-2 bg-white shadow-lg sm:w-96'
-          onSubmit={props.handleSubmit(sumbitValues)}>
-          <div className='w-4/5 h-4/5 py-4 mx-auto '>
-            <h3 className='text-md font-lighter font-bold text-gray-500'>
-              Create New Product
-            </h3>
-            <span className=' inline-block w-full h-0.5 rounded-lg bg-gradient-to-r from-red-600 via-orange-400 to-red-700'></span>
+      <div className='w-full h-4/5 flex justify-center items-center'>
+        <div className='h-3/5 w-80 mx-3 bg-white shadow-lg sm:w-96 pb-10'>
+          <form className='' onSubmit={props.handleSubmit(sumbitValues)}>
+            <div className='w-4/5 h-4/5 py-4 mx-auto '>
+              <h3 className='text-md font-lighter font-bold text-gray-500'>
+                Create New Product
+              </h3>
+              <span className=' inline-block w-full h-0.5 rounded-lg bg-gradient-to-r from-red-600 via-orange-400 to-red-700'></span>
 
-            <div>
-              <div className='col-span-6 sm:col-span-4'>
-                <Field
-                  label='Product Name'
-                  component={renderInput}
-                  type='text'
-                  name='productName'
-                  id='product-name'
-                />
-              </div>
+              <div>
+                <div className='col-span-6 sm:col-span-4'>
+                  <Field
+                    label='Product Name'
+                    component={renderInput}
+                    type='text'
+                    name='productName'
+                    id='product-name'
+                  />
+                </div>
 
-              <div className='col-span-6 sm:col-span-4'>
-                <Field
-                  label='Supplied Quantity'
-                  component={renderInput}
-                  type='text'
-                  name='suppliedQuantity'
-                  id='supplied'
-                />
-              </div>
+                <div className='col-span-6 sm:col-span-4'>
+                  <Field
+                    label='Supplied Quantity'
+                    component={renderInput}
+                    type='text'
+                    name='suppliedQuantity'
+                    id='supplied'
+                  />
+                </div>
 
-              <div className='col-span-6 sm:col-span-4'>
-                <Field
-                  label='Cost Price'
-                  component={renderInput}
-                  type='text'
-                  name='costPrice'
-                  id='cost'
-                />
-              </div>
+                <div className='col-span-6 sm:col-span-4'>
+                  <Field
+                    label='Cost Price'
+                    component={renderInput}
+                    type='text'
+                    name='costPrice'
+                    id='cost'
+                  />
+                </div>
 
-              <div className='col-span-6 sm:col-span-4'>
-                <Field
-                  label='Selling Price'
-                  type='text'
-                  name='sellingPrice'
-                  component={renderInput}
-                  id='selling'
-                />
+                <div className='col-span-6 sm:col-span-4'>
+                  <Field
+                    label='Selling Price'
+                    type='text'
+                    name='sellingPrice'
+                    component={renderInput}
+                    id='selling'
+                  />
+                </div>
               </div>
+              {/* <div> */}
+              <button
+                type='submit'
+                className='mt-3 w-full block rounded-md shadow-lg bg-indigo-600 text-base py-2 px-4 mx-auto text-center font-medium text-white hover:bg-indigo-700 focus:outline-none'>
+                Submit
+              </button>
+              {/* </div> */}
+              {/* <Button>Cancel</Button> */}
             </div>
-            {/* <div> */}
-            <Button
-              type='submit'
-              className='mt-3 w-full block rounded-md shadow-lg bg-blue-600 text-base py-2 px-4 mx-auto text-center font-medium text-white hover:bg-blue-700 focus:outline-none'>
-              Submit
-            </Button>
-            <Button
-              onClick={() => History.goBack()}
-              className='mt-3 w-full block rounded-md border border-gray-300 shadow-lg bg-white text-base py-2 px-4 mx-auto text-center font-medium text-gray-700 hover:bg-gray-50 focus:outline-none '>
-              Cancel
-            </Button>
-            {/* </div> */}
-            {/* <Button>Cancel</Button> */}
-          </div>
-        </form>
+          </form>
+          <button
+            onClick={() => History.goBack()}
+            className='mt-1 w-80 block rounded-md border border-gray-300 shadow-lg bg-white text-base py-2 mx-auto text-center font-medium text-gray-700 hover:bg-gray-50 focus:outline-none '>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../Header";
-import History from "../../History";
 import supabase from "../../supabase/Supabase";
 import Business from "../../assets/Business.svg";
+import ConfirmationModal from "./ConfirmationModal";
 
 class SignUp extends React.Component {
   state = {
@@ -10,7 +10,8 @@ class SignUp extends React.Component {
     email: "",
     password: "",
     confirm: "",
-    error: ""
+    error: "",
+    active: ""
     // supabaseErr: null
   };
 
@@ -48,9 +49,6 @@ class SignUp extends React.Component {
     this.setState({ confirm: e.target.value });
   };
 
-  onChecked = () => {
-    return <div></div>;
-  };
   renderError = () => {
     return (
       <p className='text-red-500 text-xs italic pt-2'>{`${this.state.error}`}</p>
@@ -59,15 +57,14 @@ class SignUp extends React.Component {
 
   onUserSubmit = e => {
     e.preventDefault();
-    const { username, email, password, confirm } = this.state;
+    const { password, confirm } = this.state;
 
     if (confirm !== password) {
       this.setState({ error: "Password and confirm password must match." });
     } else if (password.length <= 5) {
       this.setState({ error: "Password must be more than 5 characters." });
     } else {
-      this.signUpAuth(username, email, password);
-      History.push("/confirm");
+      this.setState({ active: "block" });
     }
   };
   render() {
@@ -85,7 +82,7 @@ class SignUp extends React.Component {
                 className='mx-auto h-full w-auto'
               />
             </div>
-            <div className='w-72 sm:w-3/5 sm:w-1/2 flex justify-center items-center'>
+            <div className='w-70 sm:w-80 flex justify-center items-center'>
               <div className='max-w-sm w-full space-y-8 h-1/2 py-10 px-4 bg-white shadow-2xl '>
                 <form
                   className='mt-8 space-y-6'
@@ -212,6 +209,7 @@ class SignUp extends React.Component {
             </div>
           </div>
         </div>
+        {!this.state.active ? null : <ConfirmationModal />}
       </>
     );
   }

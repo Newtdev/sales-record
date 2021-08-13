@@ -15,7 +15,7 @@ const Header = ({ children }) => {
             <Link
               to='/'
               href='#'
-              className='w-full flex items-center justify-center px-2 sm:px-4 py-2 border border-red-500 bg-red-500 rounded-md shadow-sm text-base font-medium text-white hover:bg-red-600'>
+              className='w-full flex items-center justify-center px-2 sm:px-4 py-2 font-bold text-lg text-base font-medium text-white'>
               {children}
             </Link>
           ) : (

@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ButtonLink = ({ children }) => {
-  const buttonPath = () => {
-    if (children === "Edit Product") {
-      return "/product/edit";
-    }
-    if (children === "Add quantity") return "/product/add";
-  };
+  // const buttonPath = () => {
+  //   if (children === "Edit Product") {
+  //     return "/product/edit";
+  //   }
+  //   if (children === "Add quantity") return "/product/add";
+  // };
 
   return (
     <Link
