@@ -1,22 +1,33 @@
 import supabase from "../supabase/Supabase";
 import History from "../History";
 import Type from "./Type";
-
-const { SIGN_IN, SIGN_OUT, RESET_PASSWORD, NEW_PASSWORD } = Type;
+import CheckAuth from "../component/appAuth/CheckAuth";
+// import CheckAuth from "../component/appAuth/CheckAuth";
+const {
+  SIGN_IN,
+  SIGN_OUT,
+  RESET_PASSWORD,
+  NEW_PASSWORD,
+  CREATE_PRODUCT,
+  FETCH_PRODUCT,
+  DELETE_PRODUCT,
+  FETCH_PRODUCTS,
+  EDIT_PRODUCT
+} = Type;
 
 export const signIN = (email, password) => async dispatch => {
   const response = await supabase.auth.signIn({ email, password });
   dispatch({ type: SIGN_IN, payload: response });
 
-  if (!response.error) {
-    History.push(`/dashboard/${response.user.id}`);
-  }
+  // CheckAuth();
+  // if (!response.error) {
+  //   History.push(`/dashboard/${response.user.id}`);
+  // }
 };
 
 export const signOut = () => async dispatch => {
   await supabase.auth.signOut();
   History.push("/");
-  // supabase.auth.onAuthStateChange(() => {});
   dispatch({ type: SIGN_OUT });
 };
 
@@ -34,21 +45,33 @@ export const updatePassword = (
   const { error, data } = await supabase.auth.api.updateUser(access_token, {
     password: new_password
   });
-  console.log(error);
-  console.log(data);
+
   dispatch({ type: NEW_PASSWORD, payload: data });
   if (!error) History.push("/password/updated");
 };
-// https://irndfzxfhqdxkbrliucy.supabase.co
-// https://irndfzxfhqdxkbrliucy.supabase.co.supabase.co/auth/v1/callback
 
-// 276591909950-3e9msp5eo8a1dsp73im1t164o9ssv642.apps.googleusercontent.com
-// secret: UYcbjiEqhMD-7GAj_0kAsEF9
-// https://irndfzxfhqdxkbrliucy.supabase.co.supabase.co/auth/v1/authorize?provider=google
+// {productName: "Wine", suppliedQuantity: "20", costPrice: "2000", sellingPrice: "4000"}
 
-// export const googleAuth = () => async dispatch => {
-//   const res = await axios(
-//     "https://irndfzxfhqdxkbrliucy.supabase.co.supabase.co/auth/v1/authorize?provider=google"
-//   );
-//   console.log(res);
-// };
+export const createProduct = values => async (dispatch, getState) => {
+  const { productName, suppliedQuantity, costPrice, sellingPrice } = values;
+
+  const res = await supabase.from("sales").insert([
+    {
+      name: `${productName}`,
+      quantity: `${suppliedQuantity}`,
+      cost: `${costPrice}`,
+      sell: `${sellingPrice}`,
+      userid: getState().AuthReducer.signIn.user.id
+    }
+  ]);
+  dispatch({ type: CREATE_PRODUCT, payload: res.data });
+};
+
+export const fetchProducts = id => async dispatch => {
+  const res = await supabase
+    .from("sales")
+    .select("*")
+    .range(0, 5)
+    .eq("userid", `${id}`);
+  dispatch({ type: FETCH_PRODUCTS, payload: res.data });
+};

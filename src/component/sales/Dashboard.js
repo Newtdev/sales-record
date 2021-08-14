@@ -17,8 +17,8 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <DashboardHeader />
-        <div className='dashboard-container w-screen h-screen bg-red-50'>
+        <div className='dashboard-container w-screen h-screen bg-gray-200'>
+          <DashboardHeader />
           <div className='dashbord w-full h-full flex justify-evenly items-center'>
             <Sidebar />
             <User />

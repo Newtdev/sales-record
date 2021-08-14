@@ -4,25 +4,23 @@ import SignOut from "./SignOut";
 
 const Sidebar = () => {
   return (
-    <div
-      className='w-96 h-full bg-blue-900 hidden sm:block'
-      id='side-on-mobile'>
+    <div className='w-96 h-full bg-gray-50 hidden md:block' id='side-on-mobile'>
       {/* description container */}
       <div
-        className='h-80 flex flex-col justify-between items-center'
+        className='h-4/5  flex flex-col justify-evenly items-center'
         id='side-bar-content'>
-        <div className='w-72 mx-4'>
-          <img src={user} alt='user' className='h-60 bg-white' />
+        <div className='w-72 mx-4 flex justify-center items-center'>
+          <img src={user} alt='user' className='h-52' />
         </div>
-        <div>
-          <SignOut />
-        </div>
-        <div className='ml-6 mt-4'>
-          <h2 className='font-extrabold text-3xl text-white '>
+        <div></div>
+        <div className='w-full mx-auto'>
+          <h2 className='font-extrabold text-3xl text-center text-gray-800 '>
             WELCOME BACK TO YOUR DASHBORD JAMES
           </h2>
         </div>
-        <div className=''></div>
+        <div className=''>
+          <SignOut />
+        </div>
       </div>
     </div>
   );

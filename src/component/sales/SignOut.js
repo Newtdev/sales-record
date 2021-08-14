@@ -5,11 +5,11 @@ import { signOut } from "../../action";
 const SignOut = props => {
   return (
     <button
-      className='mt-3 w-full block rounded-md border border-gray-300 shadow-lg bg-red-800 text-base py-2 px-4 mx-auto text-center font-medium text-gray-700 hover:bg-gray-50 focus:outline-none'
+      className='mt-3 w-full block rounded-md shadow-lg bg-red-600 text-base py-2 px-4 mx-auto text-center font-medium text-white font-bold hover:bg-red-700 focus:outline-none'
       onClick={() => {
         props.signOut();
       }}>
-      SignOut
+      Sign out
     </button>
   );
 };

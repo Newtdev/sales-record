@@ -1,11 +1,17 @@
 import React from "react";
 import Header from "../Header";
+import { Link } from "react-router-dom";
 
 const DashboardHeader = () => {
   return (
-    <div className='w-screen bg-blue-900'>
+    <div className='w-screen bg-gray-50'>
       <div className='w-full h-14 mx-auto shadow-md flex items-center'>
-        <Header></Header>
+        {/* <Header></Header> */}
+        <div className='h-full w-32 ml-10 flex items-center'>
+          <Link to='/' className='text-3xl font-extrabold text-white'>
+            WDS
+          </Link>
+        </div>
         <div className='w-56 h-12 ml-auto flex justify-around items-center mr-12'>
           <p className='text-gray-800 font-medium font-serif mr-1'>
             {" "}

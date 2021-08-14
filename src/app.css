@@ -26,3 +26,13 @@ button,
 a {
   font-family: "Roboto", sans-serif;
 }
+
+.user {
+  height: calc(100vh - 3.5rem);
+}
+.product-card {
+  width: 17rem !important;
+}
+.product-container {
+  height: 45rem;
+}

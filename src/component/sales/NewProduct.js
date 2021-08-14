@@ -1,8 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import { signIN } from "../../action";
-import Button from "../sales/Button";
+import { createProduct } from "../../action";
 
 import DashboardHeader from "./DashboardHeader";
 import History from "../../History";
@@ -31,11 +30,10 @@ const NewProduct = props => {
   };
 
   const sumbitValues = values => {
-    console.log(values);
+    // console.log(values);
+    props.createProduct(values);
   };
-  // if (props.signIN) {
-  //   History.push("/");
-  // }
+
   return (
     <div className='w-screen min-h-screen bg-red-100 side-image overflow-hidden'>
       <div>
@@ -131,7 +129,7 @@ const validate = values => {
 };
 
 const mapStateToProps = state => {
-  return { user: state.AuthReducer.signIn, session: state.AuthReducer.signIn };
+  return {};
 };
 
 // export default reduxForm({
@@ -139,7 +137,7 @@ const mapStateToProps = state => {
 //   validate
 // })(NewProduct);
 
-export default connect(mapStateToProps, { signIN })(
+export default connect(mapStateToProps, { createProduct })(
   reduxForm({
     form: "CREATE_PRODUCT",
     validate
