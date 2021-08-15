@@ -1,16 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "./Button";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../action";
+import Loader from "../Loader";
 
-const ProductList = ({ fetchProducts, signIn, Product }) => {
-  // console.log(props);
+const ProductList = ({ fetchProducts, Product, user_id }) => {
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetchProducts(signIn.user.id);
+    fetchProducts(user_id);
   }, []);
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      setLoading(true);
+    }, 3000);
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [fetchProducts]);
 
-  const displaybutton = () => {
+  const displaybutton = product => {
     return (
       <React.Fragment>
         <div className='' id='button-container'>
@@ -23,9 +31,11 @@ const ProductList = ({ fetchProducts, signIn, Product }) => {
         </div>
 
         <div>
-          <button className='block w-full py-3 rounded px-4 align-baseline font-bold text-sm text-white bg-red-600 hover:bg-red-600 mt-4 shadow-lg'>
+          <Link
+            to={`/product/${product.name}/${product.id}`}
+            className='block w-full py-3 rounded px-4 align-baseline font-bold text-center text-sm text-white bg-red-600 hover:bg-red-600 mt-4 shadow-lg'>
             Delete
-          </button>
+          </Link>
         </div>
       </React.Fragment>
     );
@@ -48,7 +58,7 @@ const ProductList = ({ fetchProducts, signIn, Product }) => {
               <div>
                 <Link
                   to='/'
-                  className='inline-block py-1 sm:py-2 rounded px-4 font-bold text-sm text-center text-white bg-blue-600 hover:bg-blue-700 shadow-lg'
+                  className='font-bold text-md text-center text-blue-600'
                   type='submit'>
                   Open Sales
                 </Link>
@@ -76,7 +86,7 @@ const ProductList = ({ fetchProducts, signIn, Product }) => {
                 <p>{product.sell}</p>
               </span>
             </div>
-            {displaybutton()}
+            {displaybutton(product)}
           </div>
         </div>
       );
@@ -86,13 +96,14 @@ const ProductList = ({ fetchProducts, signIn, Product }) => {
   if (!Product) {
     return null;
   }
+
   return (
-    <div className='product-container w-full grid grid-flow-col md:grid-flow-col md:grid-rows-2 content-start gap-y-4 px-2'>
-      {RenderProduct()}
+    <div className='product-container w-full grid sm:grid-cols-2 lg:grid-cols-4 grid-flow-row content-start gap-y-4 px-2'>
+      {!loading ? <Loader /> : RenderProduct()}
     </div>
   );
 };
-
+// md:grid-flow-col md:grid-rows-2
 const mapStateToProps = state => {
   return {
     signIn: state.AuthReducer.signIn,

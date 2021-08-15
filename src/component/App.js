@@ -8,6 +8,7 @@ import ConfirmationMessage from "../component/appAuth/ConfimationMessage";
 import { Route, Router } from "react-router-dom";
 import History from "../History";
 import NewProduct from "./sales/NewProduct";
+import DeleteProduct from "./sales/DeleteProduct";
 import CheckAuth from "./appAuth/CheckAuth";
 
 const App = () => {
@@ -27,6 +28,10 @@ const App = () => {
             component={ConfirmationMessage}></Route>
         </div>
         <CheckAuth />
+        <Route
+          path='/product/:name/:id'
+          exact
+          component={DeleteProduct}></Route>
       </Router>
     </div>
   );

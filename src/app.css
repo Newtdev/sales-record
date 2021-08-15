@@ -34,5 +34,14 @@ a {
   width: 17rem !important;
 }
 .product-container {
-  height: 45rem;
+  min-height: 15rem;
+}
+.slide {
+  display: none;
+  transition: display 0.2s ease;
+
+  /* transform: translateX(-100%); */
+}
+.slide.active {
+  display: block;
 }

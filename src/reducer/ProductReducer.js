@@ -14,6 +14,11 @@ const productReducer = (state = {}, action) => {
       return { ...state, product: action.payload };
     case FETCH_PRODUCTS:
       return { ...state, product: action.payload };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        product: state.product.filter(product => product !== action.payload)
+      };
     default:
       return state;
   }

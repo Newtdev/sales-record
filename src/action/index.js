@@ -1,8 +1,6 @@
 import supabase from "../supabase/Supabase";
 import History from "../History";
 import Type from "./Type";
-import CheckAuth from "../component/appAuth/CheckAuth";
-// import CheckAuth from "../component/appAuth/CheckAuth";
 const {
   SIGN_IN,
   SIGN_OUT,
@@ -74,4 +72,13 @@ export const fetchProducts = id => async dispatch => {
     .range(0, 5)
     .eq("userid", `${id}`);
   dispatch({ type: FETCH_PRODUCTS, payload: res.data });
+};
+
+export const deleteProduct = id => async (dispatch, getState) => {
+  await supabase
+    .from("sales")
+    .delete()
+    .eq("id", `${id}`);
+  dispatch({ type: DELETE_PRODUCT, payload: id });
+  History.push(`/dashboard/${getState().AuthReducer.signIn.user.id}`);
 };

@@ -1,18 +1,22 @@
 import React from "react";
-import Header from "../Header";
-import { Link } from "react-router-dom";
+// import Header from "../Header";
+// import { Link } from "react-router-dom";
+import SignOut from "./SignOut";
 
-const DashboardHeader = () => {
+const DashboardHeader = props => {
   return (
     <div className='w-screen bg-gray-50'>
       <div className='w-full h-14 mx-auto shadow-md flex items-center'>
         {/* <Header></Header> */}
-        <div className='h-full w-32 ml-10 flex items-center'>
-          <Link to='/' className='text-3xl font-extrabold text-white'>
+        <div className='h-full w-32 ml-10 ml-auto flex items-center'>
+          <div className=''>
+            <SignOut />
+          </div>
+          {/* <Link to='/' className='text-3xl font-extrabold text-white'>
             WDS
-          </Link>
+          </Link> */}
         </div>
-        <div className='w-56 h-12 ml-auto flex justify-around items-center mr-12'>
+        {/* <div className='w-56 h-12 ml-auto flex justify-around items-center mr-12'>
           <p className='text-gray-800 font-medium font-serif mr-1'>
             {" "}
             Hi, Thomas
@@ -24,7 +28,7 @@ const DashboardHeader = () => {
               alt='user_avatar'
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

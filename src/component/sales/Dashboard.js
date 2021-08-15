@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import { signIN } from "../../action";
 import Sidebar from "./Sidebar";
 import DashboardHeader from "./DashboardHeader";
+import hamburger from "../../assets/hamburger.svg";
 import User from "./User";
 import History from "../../History";
 
 class Dashboard extends React.Component {
+  state = { clicked: false };
   componentDidMount() {
     if (!this.props.session) {
       History.push("/");
@@ -16,12 +18,27 @@ class Dashboard extends React.Component {
   // console.log(session.session);
   render() {
     return (
-      <div>
-        <div className='dashboard-container w-screen h-screen bg-gray-200'>
+      <div className='dashboard-container w-screen h-screen bg-gray-200'>
+        <div>
+          <img
+            src={hamburger}
+            alt='menu'
+            className='mx-auto h-10 w-auto cursor-pointer absolute top-1 left-6'
+            onClick={() => {
+              this.setState({ clicked: true });
+            }}
+          />
+        </div>
+        <div>
           <DashboardHeader />
-          <div className='dashbord w-full h-full flex justify-evenly items-center'>
-            <Sidebar />
-            <User />
+          <div className='w-full h-full flex justify-evenly items-center'>
+            <div
+              className={`slide h-screen w-72 bg-red-200 ${
+                !this.state.clicked ? "active" : ""
+              }`}>
+              <Sidebar />
+            </div>
+            <User id={this.props.location.pathname} />
           </div>
         </div>
       </div>
