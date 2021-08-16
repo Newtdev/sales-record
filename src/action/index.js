@@ -13,20 +13,30 @@ const {
   EDIT_PRODUCT
 } = Type;
 
+const Auth = async () => {
+  const res = await supabase.auth.onAuthStateChange((event, session) => {
+    // if (session) {
+    //   History.push(`/dashboard/${session.user.id}`);
+    // } else {
+    //   History.push("/");
+    // }
+  });
+};
+
 export const signIN = (email, password) => async dispatch => {
   const response = await supabase.auth.signIn({ email, password });
   dispatch({ type: SIGN_IN, payload: response });
-
-  // CheckAuth();
-  // if (!response.error) {
-  //   History.push(`/dashboard/${response.user.id}`);
-  // }
+  Auth();
+  if (!response.error) {
+    History.push(`/dashboard/${response.user.id}`);
+  }
 };
 
 export const signOut = () => async dispatch => {
   await supabase.auth.signOut();
   History.push("/");
   dispatch({ type: SIGN_OUT });
+  Auth();
 };
 
 export const resetPassword = email => async dispatch => {
@@ -63,6 +73,7 @@ export const createProduct = values => async (dispatch, getState) => {
     }
   ]);
   dispatch({ type: CREATE_PRODUCT, payload: res.data });
+  History.push(`/dashboard/${getState().AuthReducer.signIn.user.id}`);
 };
 
 export const fetchProducts = id => async dispatch => {

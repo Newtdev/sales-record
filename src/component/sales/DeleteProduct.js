@@ -5,14 +5,16 @@ import { deleteProduct } from "../../action";
 import { connect } from "react-redux";
 
 const DeleteProduct = props => {
-  //   console.log(props);
   const Header = "Delete Product";
   const description = "Are you sure you want to delete this product?";
 
-  const onDelete = () => {
-    props.deleteProduct(props.match.params.id);
-    console.log(props.match.params.id);
-  };
+  // const onDelete = () => {
+  //   // props.deleteProduct(props.match.params.id);
+  //  props.onClose
+  //   // if (props.show) {
+  //   //   return null;
+  //   // }
+  // };
   const button = (
     <div className='w-52 flex justify-between items-center px-6'>
       <button
@@ -21,7 +23,7 @@ const DeleteProduct = props => {
         Cancel
       </button>
       <button
-        onClick={onDelete}
+        onClick={props.onClose}
         type='button'
         className=' block rounded-md border shadow-lg bg-red-600 px-4 py-2 text-center font-medium text-white font-bold hover:bg-red-700  mx-3'>
         Delete

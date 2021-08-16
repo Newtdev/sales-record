@@ -9,7 +9,6 @@ import { Route, Router } from "react-router-dom";
 import History from "../History";
 import NewProduct from "./sales/NewProduct";
 import DeleteProduct from "./sales/DeleteProduct";
-import CheckAuth from "./appAuth/CheckAuth";
 
 const App = () => {
   return (
@@ -27,11 +26,10 @@ const App = () => {
             exact
             component={ConfirmationMessage}></Route>
         </div>
-        <CheckAuth />
-        <Route
+        {/* <Route
           path='/product/:name/:id'
           exact
-          component={DeleteProduct}></Route>
+          component={DeleteProduct}></Route> */}
       </Router>
     </div>
   );

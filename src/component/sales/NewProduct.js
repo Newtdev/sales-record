@@ -30,13 +30,12 @@ const NewProduct = props => {
   };
 
   const sumbitValues = values => {
-    // console.log(values);
     props.createProduct(values);
   };
 
   return (
-    <div className='w-screen min-h-screen bg-red-100 side-image overflow-hidden'>
-      <div>
+    <div className='w-screen min-h-screen bg-red-100 overflow-hidden bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900'>
+      <div className='mb-6'>
         {/* <Header></Header> */}
         <DashboardHeader />
       </div>

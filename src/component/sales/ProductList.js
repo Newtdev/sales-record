@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../action";
 import Loader from "../Loader";
+import DeleteProduct from "./DeleteProduct";
 
 const ProductList = ({ fetchProducts, Product, user_id }) => {
   const [loading, setLoading] = useState(false);
+  const [active, setActive] = useState(false);
   useEffect(() => {
     fetchProducts(user_id);
   }, []);
+
   useEffect(() => {
     const timeId = setTimeout(() => {
       setLoading(true);
@@ -31,11 +34,12 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
         </div>
 
         <div>
-          <Link
-            to={`/product/${product.name}/${product.id}`}
+          <button
+            onClick={setActive(true)}
+            // to={`/product/${product.name}/${product.id}`}
             className='block w-full py-3 rounded px-4 align-baseline font-bold text-center text-sm text-white bg-red-600 hover:bg-red-600 mt-4 shadow-lg'>
             Delete
-          </Link>
+          </button>
         </div>
       </React.Fragment>
     );
@@ -100,6 +104,9 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
   return (
     <div className='product-container w-full grid sm:grid-cols-2 lg:grid-cols-4 grid-flow-row content-start gap-y-4 px-2'>
       {!loading ? <Loader /> : RenderProduct()}
+      {/* {!show ? null : <DeleteProduct show={show} />} */}
+      {/* <DeleteProduct show={show} onClose={setLoading(false)} /> */}
+      {active ? null : <DeleteProduct />}
     </div>
   );
 };
