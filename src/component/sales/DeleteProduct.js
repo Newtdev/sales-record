@@ -10,12 +10,13 @@ const DeleteProduct = ({ productId, deleteProduct, print, user_id }) => {
 
   const onDelete = () => {
     deleteProduct(productId);
-    print();
+    setTimeout(() => {
+      print();
+    }, 2000);
   };
 
-  useEffect(() => {
-    fetchProducts(user_id);
-  });
+  // useEffect(() => {
+  // });
   const button = (
     <div className='w-52 flex justify-between items-center px-6'>
       <button

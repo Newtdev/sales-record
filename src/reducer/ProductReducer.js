@@ -26,3 +26,11 @@ const productReducer = (state = {}, action) => {
 
 // res.data[0].id;
 export default productReducer;
+
+//  //   state = state.ProductReducer.product.filter(
+//     product => product.id == ownprops.productId
+//   );
+//   let b = a.map(cur => )
+//   productDetails: state.ProductReducer.product
+//   return {
+//   console.log(state);

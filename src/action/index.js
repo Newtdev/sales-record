@@ -52,8 +52,6 @@ export const updatePassword = (
   if (!error) History.push("/password/updated");
 };
 
-// {productName: "Wine", suppliedQuantity: "20", costPrice: "2000", sellingPrice: "4000"}
-
 export const createProduct = values => async (dispatch, getState) => {
   const { productName, suppliedQuantity, costPrice, sellingPrice } = values;
 
@@ -80,7 +78,7 @@ export const fetchProducts = id => async dispatch => {
 };
 
 export const deleteProduct = id => async (dispatch, getState) => {
-  const { data, error } = await supabase
+  await supabase
     .from("sales")
     .delete()
     .eq("id", `${id}`);

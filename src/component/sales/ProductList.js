@@ -4,11 +4,14 @@ import { connect } from "react-redux";
 import { fetchProducts } from "../../action";
 import Loader from "../Loader";
 import DeleteProduct from "./DeleteProduct";
+import EditProduct from "./EditProduct";
 
 const ProductList = ({ fetchProducts, Product, user_id }) => {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
-  const [productId, setProductId] = useState("");
+  const [productId, setProductId] = useState(null);
+  const [editProduct, setEditProduct] = useState(false);
+
   useEffect(() => {
     fetchProducts(user_id);
   }, []);
@@ -23,19 +26,30 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
   }, [fetchProducts]);
 
   const print = () => {
+    fetchProducts(user_id);
+
     setActive(false);
+  };
+
+  const closeModal = () => {
+    // fetchProducts(user_id);
+
+    setEditProduct(false);
   };
 
   const displaybutton = product => {
     return (
       <React.Fragment>
         <div className='' id='button-container'>
-          <Link
-            to='/'
+          <button
+            onClick={() => {
+              setProductId(product.id);
+              setEditProduct(true);
+            }}
             className='inline-block w-full py-3 sm:py-2.5 rounded px-4 align-baseline font-bold text-sm text-center text-white bg-indigo-700 hover:bg-indigo-600 mt-4 shadow-lg'
             type='submit'>
             Edit Product
-          </Link>
+          </button>
         </div>
 
         <div>
@@ -113,6 +127,9 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
     <div className='product-container w-full px-2 grid grid-fdd '>
       {!loading ? <Loader /> : RenderProduct()}
       {!active ? null : <DeleteProduct productId={productId} print={print} />}
+      {!editProduct ? null : (
+        <EditProduct productId={productId} closeModal={closeModal} />
+      )}
     </div>
   );
 };
