@@ -16,13 +16,13 @@ const NewProduct = props => {
 
     return (
       <div>
-        <label className='block text-sm font-medium text-gray-800 mt-2 my-1.5 font-bold'>
+        <label className='block text-sm font-medium text-gray-200 mt-2 my-1.5 font-bold'>
           {label}
         </label>
         <input
           name={input.name}
           {...input}
-          className={`shadow appearance-none border bg-gray-300 rounded w-full py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`shadow appearance-none border border-indigo-900 bg-gray-200 rounded-sm w-full py-2 px-3 text-indigo-900 leading-tight focus:outline-none focus:shadow-outline`}
         />
         {renderErrors(meta)}
       </div>
@@ -37,13 +37,13 @@ const NewProduct = props => {
     <div className='w-screen min-h-screen bg-red-100 overflow-hidden bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900'>
       <div className='mb-6'>
         {/* <Header></Header> */}
-        <DashboardHeader />
+        {/* <DashboardHeader /> */}
       </div>
-      <div className='w-full h-4/5 flex justify-center items-center'>
-        <div className='h-3/5 w-80 mx-3 bg-white shadow-lg sm:w-96 pb-10'>
+      <div className='w-full h-4/5 flex justify-center sm:justify-start items-center sm:ml-10'>
+        <div className='h-3/5 w-80 mx-3 sm:w-96 pb-10'>
           <form className='' onSubmit={props.handleSubmit(sumbitValues)}>
             <div className='w-4/5 h-4/5 py-4 mx-auto '>
-              <h3 className='text-md font-lighter font-bold text-gray-500'>
+              <h3 className='text-md font-lighter font-bold text-white'>
                 Create New Product
               </h3>
               <span className=' inline-block w-full h-0.5 rounded-lg bg-gradient-to-r from-red-600 via-orange-400 to-red-700'></span>
@@ -92,7 +92,7 @@ const NewProduct = props => {
               {/* <div> */}
               <button
                 type='submit'
-                className='mt-3 w-full block rounded-md shadow-lg bg-indigo-600 text-base py-2 px-4 mx-auto text-center font-medium text-white hover:bg-indigo-700 focus:outline-none'>
+                className='mt-3 w-full block rounded-sm shadow-lg bg-indigo-500 text-base py-2 px-4 mx-auto text-center font-medium text-white hover:bg-indigo-700 focus:outline-none'>
                 Submit
               </button>
               {/* </div> */}
@@ -101,7 +101,7 @@ const NewProduct = props => {
           </form>
           <button
             onClick={() => History.goBack()}
-            className='mt-1 w-80 block rounded-md border border-gray-300 shadow-lg bg-white text-base py-2 mx-auto text-center font-medium text-gray-700 hover:bg-gray-50 focus:outline-none '>
+            className='mt-1 w-4/5 block rounded-sm shadow-lg bg-white text-base py-2 mx-auto text-center font-medium text-gray-700 hover:bg-gray-50 focus:outline-none '>
             Cancel
           </button>
         </div>

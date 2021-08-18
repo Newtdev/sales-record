@@ -8,6 +8,7 @@ import DeleteProduct from "./DeleteProduct";
 const ProductList = ({ fetchProducts, Product, user_id }) => {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
+  const [productId, setProductId] = useState("");
   useEffect(() => {
     fetchProducts(user_id);
   }, []);
@@ -21,13 +22,17 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
     };
   }, [fetchProducts]);
 
+  const print = () => {
+    setActive(false);
+  };
+
   const displaybutton = product => {
     return (
       <React.Fragment>
         <div className='' id='button-container'>
           <Link
             to='/'
-            className='inline-block w-full py-3 sm:py-2.5 rounded px-4 align-baseline font-bold text-sm text-center text-white bg-blue-600 hover:bg-blue-700 mt-4 shadow-lg'
+            className='inline-block w-full py-3 sm:py-2.5 rounded px-4 align-baseline font-bold text-sm text-center text-white bg-indigo-700 hover:bg-indigo-600 mt-4 shadow-lg'
             type='submit'>
             Edit Product
           </Link>
@@ -35,7 +40,10 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
 
         <div>
           <button
-            onClick={setActive(true)}
+            onClick={() => {
+              setActive(true);
+              setProductId(product.id);
+            }}
             // to={`/product/${product.name}/${product.id}`}
             className='block w-full py-3 rounded px-4 align-baseline font-bold text-center text-sm text-white bg-red-600 hover:bg-red-600 mt-4 shadow-lg'>
             Delete
@@ -62,7 +70,7 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
               <div>
                 <Link
                   to='/'
-                  className='font-bold text-md text-center text-blue-600'
+                  className='font-bold text-md text-center text-indigo-700'
                   type='submit'>
                   Open Sales
                 </Link>
@@ -100,13 +108,11 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
   if (!Product) {
     return null;
   }
-
+  // grid sm:grid-cols-2 lg:grid-cols-4 grid-flow-row content-start gap-y-4md:grid-flow-col-dense
   return (
-    <div className='product-container w-full grid sm:grid-cols-2 lg:grid-cols-4 grid-flow-row content-start gap-y-4 px-2'>
+    <div className='product-container w-full px-2 grid grid-fdd '>
       {!loading ? <Loader /> : RenderProduct()}
-      {/* {!show ? null : <DeleteProduct show={show} />} */}
-      {/* <DeleteProduct show={show} onClose={setLoading(false)} /> */}
-      {active ? null : <DeleteProduct />}
+      {!active ? null : <DeleteProduct productId={productId} print={print} />}
     </div>
   );
 };

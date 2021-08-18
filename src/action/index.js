@@ -14,13 +14,7 @@ const {
 } = Type;
 
 const Auth = async () => {
-  const res = await supabase.auth.onAuthStateChange((event, session) => {
-    // if (session) {
-    //   History.push(`/dashboard/${session.user.id}`);
-    // } else {
-    //   History.push("/");
-    // }
-  });
+  const res = await supabase.auth.onAuthStateChange((event, session) => {});
 };
 
 export const signIN = (email, password) => async dispatch => {
@@ -41,7 +35,7 @@ export const signOut = () => async dispatch => {
 
 export const resetPassword = email => async dispatch => {
   const res = await supabase.auth.api.resetPasswordForEmail(email, {
-    redirectTo: "http://localhost:3000/password/new"
+    redirectTo: "/password/new"
   });
   dispatch({ type: RESET_PASSWORD, payload: res });
 };
@@ -86,10 +80,10 @@ export const fetchProducts = id => async dispatch => {
 };
 
 export const deleteProduct = id => async (dispatch, getState) => {
-  await supabase
+  const { data, error } = await supabase
     .from("sales")
     .delete()
     .eq("id", `${id}`);
   dispatch({ type: DELETE_PRODUCT, payload: id });
-  History.push(`/dashboard/${getState().AuthReducer.signIn.user.id}`);
+  // History.push(`/dashboard/${getState().AuthReducer.signIn.user.id}`);
 };

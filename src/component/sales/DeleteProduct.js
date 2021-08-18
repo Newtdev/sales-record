@@ -1,31 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "../Modal";
 import History from "../../History";
-import { deleteProduct } from "../../action";
+import { deleteProduct, fetchProducts } from "../../action";
 import { connect } from "react-redux";
 
-const DeleteProduct = props => {
+const DeleteProduct = ({ productId, deleteProduct, print, user_id }) => {
   const Header = "Delete Product";
   const description = "Are you sure you want to delete this product?";
 
-  // const onDelete = () => {
-  //   // props.deleteProduct(props.match.params.id);
-  //  props.onClose
-  //   // if (props.show) {
-  //   //   return null;
-  //   // }
-  // };
+  const onDelete = () => {
+    deleteProduct(productId);
+    print();
+  };
+
+  useEffect(() => {
+    fetchProducts(user_id);
+  });
   const button = (
     <div className='w-52 flex justify-between items-center px-6'>
       <button
-        onClick={() => History.goBack()}
+        onClick={() => print()}
         className='block rounded-md border border-gray-300 shadow-lg bg-white text-base px-4 py-2 text-center font-medium text-gray-700 hover:bg-gray-50 focus:outline-none '>
         Cancel
       </button>
       <button
-        onClick={props.onClose}
+        onClick={onDelete}
         type='button'
-        className=' block rounded-md border shadow-lg bg-red-600 px-4 py-2 text-center font-medium text-white font-bold hover:bg-red-700  mx-3'>
+        className=' block rounded-md border shadow-lg bg-red-600 px-4 py-2 text-center font-medium text-white font-bold hover:bg-red-700 mx-3'>
         Delete
       </button>
     </div>
@@ -37,4 +38,13 @@ const DeleteProduct = props => {
   );
 };
 
-export default connect(null, { deleteProduct })(DeleteProduct);
+const mapStateToProps = state => {
+  return {
+    signIn: state.AuthReducer.signIn
+    // Product: state.ProductReducer.product
+  };
+};
+
+export default connect(mapStateToProps, { deleteProduct, fetchProducts })(
+  DeleteProduct
+);

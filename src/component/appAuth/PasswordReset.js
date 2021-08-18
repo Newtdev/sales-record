@@ -8,6 +8,7 @@ const PasswordReset = props => {
   const [value, setValue] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  console.log(props);
 
   const onChange = e => {
     setValue(e.target.value);
