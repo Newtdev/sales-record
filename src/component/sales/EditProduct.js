@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Modal from "../Modal";
 import ProductForm from "./ProductForm";
 
 const EditProduct = ({ productDetails, closeModal, productId }) => {
+  const { name, quantity, cost, sell } = productDetails;
   const button = () => {
     return (
       <button
@@ -13,16 +14,18 @@ const EditProduct = ({ productDetails, closeModal, productId }) => {
       </button>
     );
   };
-  if (!productDetails) {
-    return null;
-  }
   return (
     <div>
       <Modal>
         <ProductForm
           button={button()}
           text={"text-gray-700"}
-          //   initialValues={checkId}
+          initialValues={{
+            productName: `${name}`,
+            suppliedQuantity: `${quantity}`,
+            costPrice: `${cost}`,
+            sellingPrice: `${sell}`
+          }}
         />
       </Modal>
     </div>
@@ -30,6 +33,9 @@ const EditProduct = ({ productDetails, closeModal, productId }) => {
 };
 
 const mapStateToProps = (state, ownprops) => {
-  return {};
+  state = Object.values(state.ProductReducer.product);
+  const [data] = state.filter(cur => cur.id === ownprops.productId);
+
+  return { productDetails: data };
 };
-export default connect(null)(EditProduct);
+export default connect(mapStateToProps)(EditProduct);

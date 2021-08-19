@@ -2,7 +2,7 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 const ProductForm = props => {
-  //   console.log(props.initialValues.registeredFields);
+  //   console.log(props.initialValues);
   const renderInput = ({ input, label, meta }) => {
     const renderErrors = ({ error, touched }) => {
       if (error && touched) {
