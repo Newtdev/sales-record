@@ -118,7 +118,7 @@ const Login = props => {
                 />
                 {/* {renderError() || (
                 )} */}
-                <p className='text-red-500 text-xs italic'>{derror}</p>
+                <p className='text-red-500 text-xs italic'>{error}</p>
               </div>
               <div className='flex items-center sm:justify-between'>
                 <button
