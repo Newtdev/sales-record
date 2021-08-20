@@ -19,6 +19,8 @@ const productReducer = (state = {}, action) => {
         ...state,
         product: state.product.filter(product => product !== action.payload)
       };
+    case EDIT_PRODUCT:
+      return { ...state, product: action.payload };
     default:
       return state;
   }

@@ -81,7 +81,21 @@ export const deleteProduct = id => async (dispatch, getState) => {
   await supabase
     .from("sales")
     .delete()
-    .eq("id", `${id}`);
+    .eq("id", id);
   dispatch({ type: DELETE_PRODUCT, payload: id });
-  // History.push(`/dashboard/${getState().AuthReducer.signIn.user.id}`);
+};
+
+export const editProduct = (values, id) => async dispatch => {
+  const { productName, suppliedQuantity, costPrice, sellingPrice } = values;
+
+  const res = await supabase
+    .from("sales")
+    .update({
+      name: `${productName}`,
+      quantity: `${suppliedQuantity}`,
+      cost: `${costPrice}`,
+      sell: `${sellingPrice}`
+    })
+    .eq("id", id);
+  dispatch({ type: EDIT_PRODUCT, payload: res.data });
 };

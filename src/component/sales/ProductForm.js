@@ -2,24 +2,23 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 
 const ProductForm = props => {
-  //   console.log(props.initialValues);
   const renderInput = ({ input, label, meta }) => {
     const renderErrors = ({ error, touched }) => {
       if (error && touched) {
-        return <p className='text-red-500 text-xs italic pt-2'>{`${error}`}</p>;
+        return <p className='text-red-500 text-xs italic pt-1'>{`${error}`}</p>;
       }
     };
 
     return (
       <div>
         <label
-          className={`block text-sm font-medium ${props.text} mt-2 my-1.5`}>
+          className={`block text-sm font-medium ${props.text} mt-1 my-1.5`}>
           {label}
         </label>
         <input
           name={input.name}
           {...input}
-          className={`shadow appearance-none border border-gray-500 bg-gray-200 rounded-sm w-full py-2 px-3 text-indigo-900 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`shadow  border border-gray-500 bg-gray-200 rounded-sm w-full py-1 px-2 text-gray-800 focus:outline-none focus:shadow-outline`}
         />
         {renderErrors(meta)}
       </div>
@@ -31,19 +30,20 @@ const ProductForm = props => {
   };
 
   return (
-    // <div className='w-screen min-h-screen bg-red-100 overflow-hidden bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900'>
-    //   <div className='mb-6'>
-
-    //   </div>
     <div className='w-full h-4/5 flex justify-center sm:justify-start items-center sm:m-10'>
       <div className='h-3/5 w-80 mx-3 sm:w-96 pb-5 '>
-        <form className='' onSubmit={props.handleSubmit(sumbitValues)}>
-          <div className='w-4/5 h-4/5 py-4 mx-auto '>
-            {/* <h3 className='text-md font-lighter font-bold text-white'>
+        <form
+          className=' w-full bg-white pb-5'
+          onSubmit={props.handleSubmit(sumbitValues)}>
+          <div className={`w-4/5 h-4/5 py-4 mx-auto`}>
+            <h3
+              className={`text-md font-lighter font-bold text-indigo-900 ${[
+                props.hidText
+              ]}`}>
               Create New Product
-            </h3> */}
-            {/* <span className=' inline-block w-full h-0.5 rounded-lg bg-gradient-to-r from-red-600 via-orange-400 to-red-700'></span> */}
-
+            </h3>
+            <span
+              className={`inline-block w-full h-0.5 rounded-lg bg-gradient-to-r from-red-70 via-orange-400 to-red-70 ${props.hidText}`}></span>
             <div>
               <div className='col-span-6 sm:col-span-4'>
                 <Field
@@ -91,6 +91,11 @@ const ProductForm = props => {
               className='mt-3 w-full block rounded-sm shadow-lg bg-indigo-500 text-base py-2 px-4 mx-auto text-center font-medium text-white hover:bg-indigo-700 focus:outline-none'>
               Submit
             </button>
+            <button
+              onClick={() => props.button()}
+              className='mt-2 w-full block rounded-sm shadow-lg bg-gray-500 text-base py-2 mx-auto text-center font-medium text-white hover:bg-gray-2400 focus:outline-none '>
+              Cancel
+            </button>
             {/* </div> */}
             {/* <Button>Cancel</Button> */}
           </div>
@@ -118,18 +123,7 @@ const validate = values => {
   return errors;
 };
 
-const mapStateToProps = state => {
-  return {};
-};
-
 export default reduxForm({
   form: "CREATE_PRODUCT",
   validate
 })(ProductForm);
-
-// export default connect(mapStateToProps, { createProduct })(
-//   reduxForm({
-//     form: "CREATE_PRODUCT",
-//     validate
-//   })(ProductForm)
-// );

@@ -20,27 +20,19 @@ const Login = props => {
     setPassword(e.target.value);
   };
 
-  const resQuest = async () => {
-    // let { data } = await supabase.from("sales").select("*");
-    // console.log(data);
-    // "https://irndfzxfhqdxkbrliucy.supabase.co/rest/v1/sales?select=*",
-    // {
-    //   apikey:
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjI2Nzk1ODM3LCJleHAiOjE5NDIzNzE4Mzd9.GB9__kF7QZimt897SCrkzxfIBDJbqMwfQrAKgvm3D_k",
-    //   Authorization: `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjI2Nzk1ODM3LCJleHAiOjE5NDIzNzE4Mzd9.GB9__kF7QZimt897SCrkzxfIBDJbqMwfQrAKgvm3D_k`
-    // }
+  // useEffect(() => {}, []);
+  const renderError = () => {
+    if (props.error) {
+      setError(props.error.error.message);
+      // return (
+      //   <p className='text-red-500 text-xs italic'>
+      //     {props.error.error.message}
+      //   </p>
+      // );
+    } else {
+      return null;
+    }
   };
-  useEffect(() => {
-    resQuest();
-  });
-  // useEffect(() => {
-  //   if (props.error) {
-  //     setError(props.error.error.message);
-  //     // return <p className='text-red-500 text-xs italic'>{this.state.error}</p>;
-  //   } else {
-  //     return null;
-  //   }
-  // }, [prp]);
 
   const onUserSubmit = e => {
     e.preventDefault();
@@ -126,6 +118,8 @@ const Login = props => {
                   value={password}
                   onChange={onPasswordChange}
                 />
+                {/* {renderError() || (
+                )} */}
                 <p className='text-red-500 text-xs italic'>{error}</p>
               </div>
               <div className='flex items-center sm:justify-between'>

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Modal from "../Modal";
-import History from "../../History";
 import { deleteProduct, fetchProducts } from "../../action";
 import { connect } from "react-redux";
 

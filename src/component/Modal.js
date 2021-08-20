@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Button from "./sales/Button";
 
 const Modal = props => {
   return ReactDOM.createPortal(

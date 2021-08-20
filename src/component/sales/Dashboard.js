@@ -9,9 +9,7 @@ import History from "../../History";
 
 class Dashboard extends React.Component {
   state = { clicked: false };
-  // componentDidMount() {}
 
-  // console.log(session.session);
   render() {
     if (!this.props.session) {
       History.push("/");

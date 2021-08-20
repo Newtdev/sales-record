@@ -27,13 +27,11 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
 
   const print = () => {
     fetchProducts(user_id);
-
     setActive(false);
   };
 
   const closeModal = () => {
-    // fetchProducts(user_id);
-
+    fetchProducts(user_id);
     setEditProduct(false);
   };
 
@@ -73,8 +71,8 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
       return (
         <div
           key={product.id}
-          className='product-card w-60 h-73 pb-6 mx-auto sm:mx-0 rounded-md shadow-lg bg-gray-50 border border-blue-400'>
-          <div className='h-full w-full px-4 py-2'>
+          className='product-card w-60 h-73  pb-6 mx-auto sm:mx-0 rounded-md shadow-lg bg-gray-50 border border-indigo-700'>
+          <div className='h-full w-full px-4 py-2 '>
             <div
               id='product-name'
               className=' w-full flex justify-between items-center'>
@@ -122,9 +120,9 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
   if (!Product) {
     return null;
   }
-  // grid sm:grid-cols-2 lg:grid-cols-4 grid-flow-row content-start gap-y-4md:grid-flow-col-dense
+  // grid sm:grid-cols-2 lg:grid-cols-4 grid-flow-row content-start :grid-flow-col-dense
   return (
-    <div className='product-container w-full px-2 grid grid-fdd '>
+    <div className=' w-full grid grid-cols-auto sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-y-4 grid-flow-row gap-x-16 '>
       {!loading ? <Loader /> : RenderProduct()}
       {!active ? null : <DeleteProduct productId={productId} print={print} />}
       {!editProduct ? null : (

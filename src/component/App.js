@@ -8,7 +8,6 @@ import ConfirmationMessage from "../component/appAuth/ConfimationMessage";
 import { Route, Router } from "react-router-dom";
 import History from "../History";
 import NewProduct from "./sales/NewProduct";
-import DeleteProduct from "./sales/DeleteProduct";
 
 const App = () => {
   return (

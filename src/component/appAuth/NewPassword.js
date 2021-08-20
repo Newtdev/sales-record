@@ -40,7 +40,7 @@ const NewPassword = props => {
             id='password'
             type='password'
             placeholder='******************'
-            // value={this.state.password}
+            value={this.state.password}
             onChange={e => setPassword(e.target.value)}
           />
         </div>
