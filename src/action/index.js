@@ -34,7 +34,7 @@ export const signOut = () => async dispatch => {
 
 export const resetPassword = email => async dispatch => {
   const res = await supabase.auth.api.resetPasswordForEmail(email, {
-    redirectTo: "/password/new"
+    redirectTo: "https://waresrecords.vercel.app/password/new"
   });
   dispatch({ type: RESET_PASSWORD, payload: res });
 };
@@ -71,7 +71,7 @@ export const fetchProducts = id => async dispatch => {
   const res = await supabase
     .from("sales")
     .select("*")
-    .range(0, 5)
+    // .range(0, 5)s
     .eq("userid", `${id}`);
   dispatch({ type: FETCH_PRODUCTS, payload: res.data });
 };

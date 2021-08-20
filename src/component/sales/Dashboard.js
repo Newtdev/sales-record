@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
       History.push("/");
     }
     return (
-      <div className='dashboard-container w-screen h-screen bg-gray-200'>
+      <div className='dashboard-container w-screen h-screen bg-white'>
         <div>
           <img
             src={hamburger}
@@ -29,12 +29,12 @@ class Dashboard extends React.Component {
         <div>
           <DashboardHeader />
           <div className='w-full h-full flex justify-evenly items-center'>
-            <div
+            {/* <div
               className={`${!this.state.clicked ? "active" : "slide"}  h-screen
               w-72
               bg-red-200`}>
               <Sidebar />
-            </div>
+            </div> */}
             <User id={this.props.location.pathname} />
           </div>
         </div>

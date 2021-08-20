@@ -1,17 +1,15 @@
 import React from "react";
 import ProductList from "./ProductList";
-import CreateButton from "./CreateButton";
+// import CreateButton from "./CreateButton";
 
 const User = props => {
   const user_id = props.id.split("/")[2];
   return (
-    <div className='user min-h-0 w-full px-4 overflow-auto '>
-      <div className=' max-w-screen ml-auto pr-2 py-1 flex  sm:mr-4 mb-6 '>
-        <CreateButton>Create Product</CreateButton>
+    <div className=' min-h-0 w-full px-4 overflow-auto mt-5 flex items-center'>
+      <div className=' max-w-screen flex justify-center items-center mr-5'>
+        {/* <CreateButton>Create Product</CreateButton> */}
       </div>
-      <React.Fragment>
-        <ProductList user_id={user_id} />
-      </React.Fragment>
+      <ProductList user_id={user_id} />
     </div>
   );
 };

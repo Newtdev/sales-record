@@ -5,6 +5,7 @@ import { fetchProducts } from "../../action";
 import Loader from "../Loader";
 import DeleteProduct from "./DeleteProduct";
 import EditProduct from "./EditProduct";
+import CreateButton from "./CreateButton";
 
 const ProductList = ({ fetchProducts, Product, user_id }) => {
   const [loading, setLoading] = useState(false);
@@ -71,7 +72,7 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
       return (
         <div
           key={product.id}
-          className='product-card w-60 h-73  pb-6 mx-auto sm:mx-0 rounded-md shadow-lg bg-gray-50 border border-indigo-700'>
+          className='product-card h-73 pb-6 sm:mx-0 rounded-md shadow-lg bg-gray-50 border border-indigo-700 mb-4'>
           <div className='h-full w-full px-4 py-2 '>
             <div
               id='product-name'
@@ -122,7 +123,10 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
   }
   // grid sm:grid-cols-2 lg:grid-cols-4 grid-flow-row content-start :grid-flow-col-dense
   return (
-    <div className=' w-full grid grid-cols-auto sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-y-4 grid-flow-row gap-x-16 '>
+    <div className='product-list w-full flex items-center justify-evenly flex-wrap px-5'>
+      <div className='w-64 mr-3 flex flex-wrap items-center justify-center mb-4'>
+        <CreateButton>Create Product</CreateButton>
+      </div>
       {!loading ? <Loader /> : RenderProduct()}
       {!active ? null : <DeleteProduct productId={productId} print={print} />}
       {!editProduct ? null : (

@@ -27,15 +27,17 @@ a {
   font-family: "Roboto", sans-serif;
 }
 
-.user {
+/* .user {
   height: calc(100vh - 3.5rem);
-}
+} */
 .product-card {
   width: 17rem !important;
 }
-.product-container {
+.product-container,
+.add-product {
   min-height: 15rem;
 }
+
 .slide {
   display: none;
   transition: display 0.2s ease;
