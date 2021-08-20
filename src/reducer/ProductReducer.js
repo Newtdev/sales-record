@@ -1,12 +1,6 @@
 import Type from "../action/Type";
 
-const {
-  CREATE_PRODUCT,
-  FETCH_PRODUCT,
-  DELETE_PRODUCT,
-  FETCH_PRODUCTS,
-  EDIT_PRODUCT
-} = Type;
+const { CREATE_PRODUCT, DELETE_PRODUCT, FETCH_PRODUCTS, EDIT_PRODUCT } = Type;
 
 const productReducer = (state = {}, action) => {
   switch (action.type) {

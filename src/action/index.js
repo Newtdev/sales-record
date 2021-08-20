@@ -7,14 +7,13 @@ const {
   RESET_PASSWORD,
   NEW_PASSWORD,
   CREATE_PRODUCT,
-  FETCH_PRODUCT,
   DELETE_PRODUCT,
   FETCH_PRODUCTS,
   EDIT_PRODUCT
 } = Type;
 
 const Auth = async () => {
-  const res = await supabase.auth.onAuthStateChange((event, session) => {});
+  await supabase.auth.onAuthStateChange((event, session) => {});
 };
 
 export const signIN = (email, password) => async dispatch => {

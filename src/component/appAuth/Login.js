@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signIN } from "../../action";
@@ -20,15 +20,13 @@ const Login = props => {
     setPassword(e.target.value);
   };
 
-  // useEffect(() => {}, []);
   const renderError = () => {
     if (props.error) {
-      setError(props.error.error.message);
-      // return (
-      //   <p className='text-red-500 text-xs italic'>
-      //     {props.error.error.message}
-      //   </p>
-      // );
+      return (
+        <p className='text-red-500 text-xs italic'>
+          {props.error.error.message}
+        </p>
+      );
     } else {
       return null;
     }
@@ -46,6 +44,7 @@ const Login = props => {
   };
 
   const errborder = error ? "border-red-500" : "";
+
   return (
     <div className='h-screen bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900 overflow-hidden'>
       <div>
@@ -116,9 +115,9 @@ const Login = props => {
                   value={password}
                   onChange={onPasswordChange}
                 />
-                {/* {renderError() || (
-                )} */}
-                <p className='text-red-500 text-xs italic'>{error}</p>
+                {renderError() || (
+                  <p className='text-red-500 text-xs italic'>{error}</p>
+                )}
               </div>
               <div className='flex items-center sm:justify-between'>
                 <button

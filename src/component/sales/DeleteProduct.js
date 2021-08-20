@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Modal from "../Modal";
 import { deleteProduct, fetchProducts } from "../../action";
 import { connect } from "react-redux";
 
-const DeleteProduct = ({ productId, deleteProduct, print, user_id }) => {
+const DeleteProduct = ({ productId, deleteProduct, print }) => {
   const Header = "Delete Product";
   const description = "Are you sure you want to delete this product?";
 
@@ -14,8 +14,6 @@ const DeleteProduct = ({ productId, deleteProduct, print, user_id }) => {
     }, 2000);
   };
 
-  // useEffect(() => {
-  // });
   const button = (
     <div className='w-52 flex justify-between items-center px-6'>
       <button
