@@ -41,9 +41,7 @@ const Login = props => {
     } else if (!password) {
       setError("Password must be provided");
     } else {
-      // supabase.auth.onAuthStateChange((event, session) => {
       props.signIN(email, password);
-      // });
     }
   };
 
@@ -120,7 +118,7 @@ const Login = props => {
                 />
                 {/* {renderError() || (
                 )} */}
-                <p className='text-red-500 text-xs italic'>{error}</p>
+                <p className='text-red-500 text-xs italic'>{derror}</p>
               </div>
               <div className='flex items-center sm:justify-between'>
                 <button
