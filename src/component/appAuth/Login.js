@@ -20,17 +20,17 @@ const Login = props => {
     setPassword(e.target.value);
   };
 
-  const renderError = () => {
-    if (props.error) {
-      return (
-        <p className='text-red-500 text-xs italic'>
-          {props.error.error.message}
-        </p>
-      );
-    } else {
-      return null;
-    }
-  };
+  // const renderError = () => {
+  //   if (props.error) {
+  //     return (
+  //       <p className='text-red-500 text-xs italic'>
+  //         {props.error.error.message}
+  //       </p>
+  //     );
+  //   } else {
+  //     return null;
+  //   }
+  // };
 
   const onUserSubmit = e => {
     e.preventDefault();
@@ -115,9 +115,9 @@ const Login = props => {
                   value={password}
                   onChange={onPasswordChange}
                 />
-                {renderError() || (
-                  <p className='text-red-500 text-xs italic'>{error}</p>
-                )}
+                {/* {renderError() || ( */}
+                <p className='text-red-500 text-xs italic'>{error}</p>
+                {/* )} */}
               </div>
               <div className='flex items-center sm:justify-between'>
                 <button

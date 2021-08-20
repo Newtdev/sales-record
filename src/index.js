@@ -5,7 +5,7 @@ import reducer from "./reducer";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import "../src/app.css";
+import "./index.css";
 // debug_session=<some_string>
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
