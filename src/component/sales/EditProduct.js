@@ -20,15 +20,6 @@ const EditProduct = ({
     }, 1000);
   };
   const Text = "hidden";
-  //   const button = () => {
-  //     return (
-  //       <button
-  //         onClick={() => closeModal()}
-  //         className='mt-1 w-4/5 block rounded-sm shadow-lg bg-gray-300 text-base py-2 mx-auto text-center font-medium text-gray-700 hover:bg-gray-400 focus:outline-none '>
-  //         Cancel
-  //       </button>
-  //     );
-  //   };
 
   const button = () => {
     closeModal();

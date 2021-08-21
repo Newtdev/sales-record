@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Header = ({ children }) => {
   return (
-    <div className='h-14 w-screen'>
+    <div className='h-16 w-screen'>
       <div className=' h-full w-full sm:px-16 mx-auto flex justify-between items-center'>
-        <div className='h-full w-32 ml-10 flex items-center'>
+        <div className='h-full w-32 flex items-center'>
           <Link to='/' className='text-3xl font-extrabold text-white logo'>
             WDS
           </Link>

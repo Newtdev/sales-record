@@ -138,8 +138,8 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
   }
   // grid sm:grid-cols-2 lg:grid-cols-4 grid-flow-row content-start :grid-flow-col-dense
   return (
-    <div className='product-list w-full flex items-center justify-evenly flex-wrap px-5 bg-purple-100'>
-      <div className='w-64 mr-3 flex flex-wrap items-center justify-center mb-4'>
+    <div className='product-list w-full flex items-center justify-between flex-wrap px-5'>
+      <div className='w-64 mr-3 flex flex-wrap items-center justify-start  mb-4'>
         <CreateButton>Create Product</CreateButton>
       </div>
       {!loading ? <Loader /> : RenderProduct()}

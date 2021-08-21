@@ -1,6 +1,5 @@
 import React from "react";
 import ProductList from "./ProductList";
-// import CreateButton from "./CreateButton";
 
 const User = props => {
   const user_id = props.id.split("/")[2];

@@ -6,7 +6,7 @@ import SignOut from "./SignOut";
 const DashboardHeader = props => {
   return (
     <div className='w-screen'>
-      <div className='w-full h-16 mx-auto bg-purple-800 '>
+      <div className='w-full h-16 mx-auto bg-purple-800 shadow-md'>
         <Header></Header>
         <div className='h-full w-32 ml-10 ml-auto flex items-center'>
           {/* <SignOut /> */}

@@ -3,6 +3,7 @@ import ProductForm from "./ProductForm";
 import { connect } from "react-redux";
 import { createProduct } from "../../action";
 import History from "../../History";
+import Header from "../Header";
 
 const NewProduct = props => {
   const createAction = values => {
@@ -12,10 +13,22 @@ const NewProduct = props => {
   const button = () => {
     History.goBack();
   };
+  const padding = 1.5;
+  const color = "bg-gray-100";
+
   return (
-    // <div className='min-h-screen w-1/2 bg-white pb-5 '>
     <div className='w-screen min-h-screen overflow-hidden bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900'>
-      <ProductForm action={createAction} button={button} />
+      <div className='w-full bg-purple-900 shadow-md'>
+        <Header></Header>
+      </div>
+
+      <ProductForm
+        action={createAction}
+        button={button}
+        padding={padding}
+        color={color}
+        newText={"text-gray-200"}
+      />
     </div>
     // <div></div>
     // </div>

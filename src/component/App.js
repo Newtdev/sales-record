@@ -1,13 +1,14 @@
 import React from "react";
+import { Route, Router } from "react-router-dom";
 import Login from "./appAuth/Login";
 import Signup from "./appAuth/Signup";
-import Dashboard from "../component/sales/Dashboard";
+import Dashboard from "./sales/Dashboard";
 import PasswordRest from "./appAuth/PasswordReset";
-import NewPassword from "../component/appAuth/NewPassword";
-import ConfirmationMessage from "../component/appAuth/ConfimationMessage";
-import { Route, Router } from "react-router-dom";
-import History from "../History";
+import NewPassword from "./appAuth/NewPassword";
+import Daily from "./dailysales/Daily";
+import ConfirmationMessage from "./appAuth/ConfimationMessage";
 import NewProduct from "./sales/NewProduct";
+import History from "../History";
 
 const App = () => {
   return (
@@ -24,11 +25,8 @@ const App = () => {
             path='/password/updated'
             exact
             component={ConfirmationMessage}></Route>
+          <Route path='/sales/:id' exact component={Daily}></Route>
         </div>
-        {/* <Route
-          path='/product/:name/:id'
-          exact
-          component={DeleteProduct}></Route> */}
       </Router>
     </div>
   );

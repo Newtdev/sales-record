@@ -4,6 +4,7 @@ import Type from "./Type";
 const {
   SIGN_IN,
   SIGN_OUT,
+  SIGN_UP,
   RESET_PASSWORD,
   NEW_PASSWORD,
   CREATE_PRODUCT,
@@ -17,14 +18,12 @@ const Auth = async () => {
 };
 
 export const signUp = (username, email, password) => async dispatch => {
-  const { user, session, error } = await supabase.auth.signUp({
+  const res = await supabase.auth.signUp({
     username: `${username}`,
     email: `${email}`,
     password: `${password}`
   });
-  console.log(user);
-  console.log(session);
-  console.log(email);
+  dispatch({ type: SIGN_UP, payload: res.user });
 };
 
 export const signIN = (email, password) => async dispatch => {

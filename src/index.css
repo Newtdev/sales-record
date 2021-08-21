@@ -28,7 +28,9 @@ button,
 a {
   font-family: "Roboto", sans-serif;
 }
-
+.heading {
+  font-family: "Roboto", sans-serif;
+}
 .logo {
   font-family: "Open Sans", sans-serif;
 }
