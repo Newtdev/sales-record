@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Open+Sans:wght@800&display=swap");
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
+</style> */
 
 .background {
   background-image: url(./assets/gradienta-m_7p45JfXQo-unsplash.jpg);
@@ -27,6 +29,9 @@ a {
   font-family: "Roboto", sans-serif;
 }
 
+.logo {
+  font-family: "Open Sans", sans-serif;
+}
 /* .user {
   height: calc(100vh - 3.5rem);
 } */

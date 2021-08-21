@@ -6,7 +6,7 @@ const Header = ({ children }) => {
     <div className='h-14 w-screen'>
       <div className=' h-full w-full sm:px-16 mx-auto flex justify-between items-center'>
         <div className='h-full w-32 ml-10 flex items-center'>
-          <Link to='/' className='text-3xl font-extrabold text-white'>
+          <Link to='/' className='text-3xl font-extrabold text-white logo'>
             WDS
           </Link>
         </div>

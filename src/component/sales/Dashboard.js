@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signIN } from "../../action";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 import DashboardHeader from "./DashboardHeader";
 import hamburger from "../../assets/hamburger.svg";
 import User from "./User";
@@ -15,8 +15,8 @@ class Dashboard extends React.Component {
       History.push("/");
     }
     return (
-      <div className='dashboard-container w-screen h-screen bg-white'>
-        <div>
+      <div className='dashboard-container w-screen h-screen bg-purple-100'>
+        {/* <div>
           <img
             src={hamburger}
             alt='menu'
@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
               this.setState({ clicked: true });
             }}
           />
-        </div>
+        </div> */}
         <div>
           <DashboardHeader />
           <div className='w-full h-full flex justify-evenly items-center'>

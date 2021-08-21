@@ -1,17 +1,17 @@
 import React from "react";
-// import Header from "../Header";
+import Header from "../Header";
 // import { Link } from "react-router-dom";
 import SignOut from "./SignOut";
 
 const DashboardHeader = props => {
   return (
     <div className='w-screen'>
-      <div className='w-full h-16 mx-auto bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900 '>
-        {/* <Header></Header> */}
+      <div className='w-full h-16 mx-auto bg-purple-800 '>
+        <Header></Header>
         <div className='h-full w-32 ml-10 ml-auto flex items-center'>
-          <div className=''>
-            <SignOut />
-          </div>
+          {/* <SignOut /> */}
+          {/* <div className=''>
+          </div> */}
           {/* <Link to='/' className='text-3xl font-extrabold text-white'>
             WDS
           </Link> */}

@@ -16,6 +16,17 @@ const Auth = async () => {
   await supabase.auth.onAuthStateChange((event, session) => {});
 };
 
+export const signUp = (username, email, password) => async dispatch => {
+  const { user, session, error } = await supabase.auth.signUp({
+    username: `${username}`,
+    email: `${email}`,
+    password: `${password}`
+  });
+  console.log(user);
+  console.log(session);
+  console.log(email);
+};
+
 export const signIN = (email, password) => async dispatch => {
   const response = await supabase.auth.signIn({ email, password });
   dispatch({ type: SIGN_IN, payload: response });
@@ -34,7 +45,7 @@ export const signOut = () => async dispatch => {
 
 export const resetPassword = email => async dispatch => {
   const res = await supabase.auth.api.resetPasswordForEmail(email, {
-    redirectTo: "https://waresrecords.vercel.app/password/new"
+    redirectTo: "http://localhost:3000/password/new"
   });
   dispatch({ type: RESET_PASSWORD, payload: res });
 };

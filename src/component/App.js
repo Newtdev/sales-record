@@ -11,7 +11,7 @@ import NewProduct from "./sales/NewProduct";
 
 const App = () => {
   return (
-    <div className='overflow-x-hidden'>
+    <div className='overflow-x-hidden bg-purple-100'>
       <Router history={History}>
         <div>
           <Route path='/' exact component={Login}></Route>
