@@ -27,6 +27,10 @@ const NewProduct = props => {
         button={button}
         padding={padding}
         color={color}
+        pad={20}
+        width={"full"}
+        height={"full"}
+        border={100}
         newText={"text-gray-200"}
       />
     </div>

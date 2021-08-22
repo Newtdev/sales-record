@@ -5,7 +5,8 @@ import { fetchProducts } from "../../action";
 import Loader from "../Loader";
 import DeleteProduct from "./DeleteProduct";
 import EditProduct from "./EditProduct";
-import CreateButton from "./CreateButton";
+
+import dollar from "../../assets/dollar.svg";
 
 const ProductList = ({ fetchProducts, Product, user_id }) => {
   const [loading, setLoading] = useState(false);
@@ -93,37 +94,28 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
               className='w-full py-2 flex flex-col justify-around'
               id='container'>
               <span
-                className='flex justify-between max-w-full py-1 px-2 font-bold text-md sm:text-lg text-gray-700'
+                className='flex justify-between max-w-full py-1 px-2 font-bold text-md sm:text-md text-gray-700'
                 id='quantity'>
                 <p>Quantity:</p>
                 <p>{product.quantity} pcs</p>
               </span>
               <span
-                className='flex justify-between max-w-full py-1 px-2 font-bold text-md sm:text-lg text-gray-700'
+                className='flex justify-between max-w-full py-1 px-2 font-bold text-md sm:text-md text-gray-700'
                 id='cost-price'>
                 <p>Cost Price:</p>
                 <p className='flex items-center justify-between'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    className='h-6 w-6'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'>
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
-                  </svg>
+                  <img className='w-2.5 mr-1' src={dollar} alt='dollar sign' />
                   {product.cost}
                 </p>
               </span>
               <span
-                className='flex justify-between max-w-full px-2 py-1 font-bold text-md sm:text-lg text-gray-700'
+                className='flex justify-between max-w-full px-2 py-1 font-bold text-md sm:text-md text-gray-700'
                 id='selling-price'>
                 <p>Selling Price:</p>
-                <p>{product.sell}</p>
+                <p className='flex items-center justify-between'>
+                  <img className='w-2 mr-1' src={dollar} alt='dollar sign' />
+                  {product.sell}
+                </p>
               </span>
             </div>
             {displaybutton(product)}
@@ -136,13 +128,11 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
   if (!Product) {
     return null;
   }
-  // grid sm:grid-cols-2 lg:grid-cols-4 grid-flow-row content-start :grid-flow-col-dense
+
   return (
-    <div className='product-list w-full flex items-center justify-between flex-wrap px-5'>
-      <div className='w-64 mr-3 flex flex-wrap items-center justify-start  mb-4'>
-        <CreateButton>Create Product</CreateButton>
-      </div>
+    <div className='product-list w-full max-w-6xl flex justify-center sm:justify-evenly items-center flex-wrap mx-auto sm:mx-0 '>
       {!loading ? <Loader /> : RenderProduct()}
+
       {!active ? null : <DeleteProduct productId={productId} print={print} />}
       {!editProduct ? null : (
         <EditProduct productId={productId} closeModal={closeModal} />

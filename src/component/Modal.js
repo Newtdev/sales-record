@@ -45,7 +45,8 @@ const Modal = props => {
             <div className='sm:flex sm:items-start'>
               {props.children}
 
-              <div className='mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10'>
+              <div
+                className={`mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10 ${props.removed}`}>
                 {/* <!-- Heroicon name: outline/exclamation --> */}
                 <svg
                   className='h-6 w-6 text-red-600'

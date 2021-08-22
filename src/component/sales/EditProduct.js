@@ -27,12 +27,17 @@ const EditProduct = ({
 
   return (
     <div>
-      <Modal>
+      <Modal removed={"hidden"}>
         <ProductForm
           hidText={Text}
           action={createAction}
           button={button}
           text={"text-gray-700"}
+          color={"bg-gray-400"}
+          border={400}
+          width={96}
+          pad={0}
+          height={70}
           initialValues={{
             productName: `${name}`,
             suppliedQuantity: `${quantity}`,

@@ -1,14 +1,17 @@
 import React from "react";
 import Header from "../Header";
-// import { Link } from "react-router-dom";
-import SignOut from "./SignOut";
+import CreateButton from "./CreateButton";
+// import SignOut from "./SignOut";
 
 const DashboardHeader = props => {
   return (
     <div className='w-screen'>
-      <div className='w-full h-16 mx-auto bg-purple-800 shadow-md'>
+      <div className='w-full h-16 mx-auto flex items-center justify-between bg-purple-800 shadow-md'>
         <Header></Header>
-        <div className='h-full w-32 ml-10 ml-auto flex items-center'>
+        <div className='h-full w-72 sm:w-52 ml-10 ml-auto flex items-center justify-around'>
+          <CreateButton>Create Product</CreateButton>
+          {/* <div className='w-64 mr-3 flex items-center justify-start '> */}
+          {/* </div> */}
           {/* <SignOut /> */}
           {/* <div className=''>
           </div> */}
