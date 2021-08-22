@@ -33,7 +33,7 @@ const ProductForm = props => {
   return (
     <div
       className={`w-full h-${props.height} flex justify-center sm:justify-start items-center `}>
-      <div className='h-full w-80  sm:w-1/2 pb-5'>
+      <div className='h-full w-80  sm:w-96 pb-5'>
         <form
           className={` w-${props.width} ml-5 sm:pr-${props.pad} pb-5`}
           onSubmit={props.handleSubmit(sumbitValues)}>

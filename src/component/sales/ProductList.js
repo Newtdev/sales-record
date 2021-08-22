@@ -6,8 +6,6 @@ import Loader from "../Loader";
 import DeleteProduct from "./DeleteProduct";
 import EditProduct from "./EditProduct";
 
-import dollar from "../../assets/dollar.svg";
-
 const ProductList = ({ fetchProducts, Product, user_id }) => {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
@@ -83,7 +81,7 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
               </h2>
               <div>
                 <Link
-                  to='/'
+                  to={`/sales/${product.name}/${product.id}`}
                   className='font-bold text-md text-center text-indigo-700'
                   type='submit'>
                   Open Sales
@@ -104,7 +102,9 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
                 id='cost-price'>
                 <p>Cost Price:</p>
                 <p className='flex items-center justify-between'>
-                  <img className='w-2.5 mr-1' src={dollar} alt='dollar sign' />
+                  <small className='heading line-through text-2xl sm:text-4xl font-bold'>
+                    N
+                  </small>
                   {product.cost}
                 </p>
               </span>
@@ -113,7 +113,9 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
                 id='selling-price'>
                 <p>Selling Price:</p>
                 <p className='flex items-center justify-between'>
-                  <img className='w-2 mr-1' src={dollar} alt='dollar sign' />
+                  <small className='heading line-through text-2xl sm:text-4xl font-bold'>
+                    N
+                  </small>
                   {product.sell}
                 </p>
               </span>

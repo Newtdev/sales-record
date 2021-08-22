@@ -25,7 +25,7 @@ const App = () => {
             path='/password/updated'
             exact
             component={ConfirmationMessage}></Route>
-          <Route path='/sales/:id' exact component={Daily}></Route>
+          <Route path='/sales/:name/:id' exact component={Daily}></Route>
         </div>
       </Router>
     </div>
