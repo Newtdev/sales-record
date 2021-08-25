@@ -47,7 +47,7 @@ const Login = props => {
 
   return (
     <div className='h-screen bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900 overflow-hidden'>
-      <div>
+      <div className='shadow-md'>
         <Header />
       </div>
       <div className='h-full flex justify-evenly items-center'>
@@ -55,14 +55,12 @@ const Login = props => {
           <img
             src={business}
             alt='calculator'
-            className='mx-auto h-full w-auto'
+            className='mx-auto h-1/2 w-auto'
           />
         </div>
-        <div className='w-full sm:w-1/2 flex justify-center items-center mx-4 mt-8 sm:mt-0'>
-          <div className='w-full max-w-xs'>
-            <form
-              className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
-              onSubmit={onUserSubmit}>
+        <div className='w-full sm:w-1/2 flex justify-center items-center mx-4 sm:mt-0'>
+          <div className='w-full max-w-xs bg-white shadow-md rounded'>
+            <div className=' pt-5'>
               <div className='h-24 w-full flex flex-col items-center'>
                 <h2 className='text-center text-2xl font-extrabold text-indigo-800 mb-1'>
                   WDS
@@ -76,15 +74,17 @@ const Login = props => {
                   Sign up
                 </Link>
               </div>
-
-              <div className='h-14'>
+              <div className='flex justify-center items-center'>
                 <GoogleAuth />
               </div>
-              <div className='w-full h-8 flex justify-center items-center '>
-                <span className='inline-block h-0.5 w-full bg-gray-300 rounded-3xl'></span>
+
+              <div className='w-full h-8 flex justify-center items-center py-8 '>
+                <span className='inline-block h-0.5 w-28 bg-gray-300 rounded-3xl'></span>
                 <p className='font-bold px-2 text-gray-600'>Or</p>
-                <span className='inline-block h-0.5 w-full bg-gray-300 rounded-3xl'></span>
+                <span className='inline-block h-0.5 w-28 bg-gray-300 rounded-3xl'></span>
               </div>
+            </div>
+            <form className=' px-8 pb-8 mb-4' onSubmit={onUserSubmit}>
               <div className='mb-4'>
                 <label
                   className='block text-gray-700 text-sm font-bold mb-2'

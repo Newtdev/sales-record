@@ -102,7 +102,7 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
                 id='cost-price'>
                 <p>Cost Price:</p>
                 <p className='flex items-center justify-between'>
-                  <small className='heading line-through text-2xl sm:text-4xl font-bold'>
+                  <small className='heading line-through text-2xl font-bold'>
                     N
                   </small>
                   {product.cost}

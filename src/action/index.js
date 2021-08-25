@@ -1,6 +1,7 @@
 import supabase from "../supabase/Supabase";
 import History from "../History";
 import Type from "./Type";
+import axios from "axios";
 const {
   SIGN_IN,
   SIGN_OUT,
@@ -10,7 +11,9 @@ const {
   CREATE_PRODUCT,
   DELETE_PRODUCT,
   FETCH_PRODUCTS,
-  EDIT_PRODUCT
+  FETCH_PRODUCT,
+  EDIT_PRODUCT,
+  GOOGLE_AUTH
 } = Type;
 
 const Auth = async () => {
@@ -42,9 +45,17 @@ export const signOut = () => async dispatch => {
   Auth();
 };
 
+export const googleAuth = () => async dispatch => {
+  const res = await supabase.auth.signIn({
+    provider: "google"
+  });
+  console.log(res);
+  // dispatch({ type: GOOGLE_AUTH, payload: res });
+};
+
 export const resetPassword = email => async dispatch => {
   const res = await supabase.auth.api.resetPasswordForEmail(email, {
-    redirectTo: "http://localhost:3000/password/new"
+    redirectTo: "http://waresrecords/password/new"
   });
   dispatch({ type: RESET_PASSWORD, payload: res });
 };
@@ -107,4 +118,12 @@ export const editProduct = (values, id) => async dispatch => {
     })
     .eq("id", id);
   dispatch({ type: EDIT_PRODUCT, payload: res.data });
+};
+
+export const fetchProduct = id => async dispatch => {
+  const res = await supabase
+    .from("sales")
+    .select("*")
+    .eq("id", `${id}`);
+  dispatch({ type: FETCH_PRODUCT, payload: res.data });
 };

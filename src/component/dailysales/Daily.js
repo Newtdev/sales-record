@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import ProductTotals from "./ProductTotals";
 import SalesForm from "./SalesForm";
 import Header from "../Header";
+import { fetchProduct } from "../../action";
+import SalesDetails from "./SalesDetails";
 
-const Daily = ({ state }) => {
+const Daily = ({ state, fetchProduct }) => {
+  useEffect(() => {
+    fetchProduct();
+  });
+
   const costCal = () => {
     const number = state.quantity * state.cost;
+    return new Intl.NumberFormat().format(number);
+  };
+
+  const calcSales = () => {
+    const number = state.quantity * state.sell;
     return new Intl.NumberFormat().format(number);
   };
 
@@ -19,7 +30,7 @@ const Daily = ({ state }) => {
   return (
     <div className='h-screen w-screen bg-red-800'>
       <Header />
-      <div className='h-60 w-screen py-4 flex items-center justify-start md:justify-center  overflow-x-auto '>
+      <div className='h-60 w-screen py-4 flex items-center justify-start overflow-x-auto '>
         <ProductTotals>
           {"Supplied Quantity"}
           {state.quantity}
@@ -31,30 +42,28 @@ const Daily = ({ state }) => {
           {costCal()}
         </ProductTotals>
         <ProductTotals>
-          {"Total Sales"}
-
+          {"Total selling Price"}
           {currencySymbol}
+          {calcSales()}
+        </ProductTotals>
+        <ProductTotals>
+          {"Total Sales"}
+          {/* {currencySymbol} */}
           {0}
         </ProductTotals>
-        {/* <ProductTotals supplied={state.quantity} ></ProductTotals> */}
         {/* <ProductTotals supplied={state.quantity}></ProductTotals> */}
-        {/* <ProductTotals /> */}
-        {/* <ProductTotals /> */}
       </div>
       <div>
         <SalesForm />
+        <SalesDetails />
       </div>
     </div>
     // </div>
   );
 };
-
+//Math.floor(ownprops.match.params.id)
 const mapStateToProps = (state, ownprops) => {
-  const product = state.ProductReducer.product;
-  const [productData] = product.filter(
-    cur => cur.id == ownprops.match.params.id
-  );
-  return { state: productData };
+  return { productDetails: state.ProductReducer };
 };
 
-export default connect(mapStateToProps)(Daily);
+export default connect(mapStateToProps, { fetchProduct })(Daily);

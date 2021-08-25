@@ -1,15 +1,21 @@
 import React from "react";
 import google from "../../assets/google.svg";
-// import { googleAuth } from "../../action";
+import { connect } from "react-redux";
+import { googleAuth } from "../../action";
 
-const GoogleAuth = props => {
-  console.log(props);
+const GoogleAuth = ({ googleAuth }) => {
+  const getAuth = () => {
+    googleAuth();
+  };
+
   return (
-    <button className=' py-2 w-full border border-red-600 rounded-md shadow-lg text-red-600 text-sm flex items-center justify-evenly font-bold'>
+    <button
+      className='py-2 w-4/5 border border-red-600 rounded-md shadow-lg text-red-600 text-sm flex items-center justify-evenly font-bold'
+      onClick={getAuth}>
       <img src={google} alt='google logo' className='h-6' />
       Sign In With Google
     </button>
   );
 };
 
-export default GoogleAuth;
+export default connect(null, { googleAuth })(GoogleAuth);

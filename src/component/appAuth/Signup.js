@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { signUp } from "../../action";
 import Header from "../Header";
 import Business from "../../assets/Business.svg";
@@ -47,7 +48,7 @@ const SignUp = props => {
     <>
       <div className='max-h-screen sm:px-6 lg:px-8 overflow-hidden background'>
         <div>
-          <Header>Log in</Header>
+          <Header></Header>
         </div>
         <div className=' h-screen flex items-center justify-evenly flex-wrap '>
           <div className='w-1/2 h-full hidden sm:block'>
@@ -58,18 +59,27 @@ const SignUp = props => {
             />
           </div>
           <div className='w-70 sm:w-80 flex justify-center items-center'>
-            <div className='max-w-sm w-full space-y-8 h-1/2 py-10 px-4 bg-white shadow-2xl '>
-              <form
-                className='mt-8 space-y-6'
-                action='#'
-                onSubmit={onUserSubmit}>
-                <h2 className='text-center text-lg font-extrabold text-gray-900'>
-                  Sign Up with{" "}
+            <div className='max-w-sm w-full space-y-8 h-1/2 pb-10 py-6 px-4 bg-white shadow-2xl '>
+              <div className='h-24 flex flex-col items-center justify-evenly'>
+                <h2 className='text-center text-lg font-semibold heading text-gray-500'>
+                  Sign up with{" "}
                   <span className='text-3xl font-extrabold text-indigo-800'>
                     WDS
                   </span>
                 </h2>
+                <div className=' w-full flex justify-center items-center'>
+                  <span className='font-light text-sm sm:text-md text-gray-500 mr-2'>
+                    Already signed up?
+                  </span>
+                  <Link
+                    className='inline-block font-bold text-sm text-blue-500 hover:text-blue-800'
+                    to='/'>
+                    Login
+                  </Link>
+                </div>
+              </div>
 
+              <form className=' space-y-6' action='#' onSubmit={onUserSubmit}>
                 <input type='hidden' name='remember' value='true' />
                 <div className='rounded-md shadow-sm -space-y-px'>
                   <div>
@@ -131,30 +141,6 @@ const SignUp = props => {
                     />
                   </div>
                   {renderError()}
-                </div>
-
-                <div className='flex items-center justify-between'>
-                  <div className='flex items-center'>
-                    <input
-                      id='remember-me'
-                      name='remember-me'
-                      type='checkbox'
-                      className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
-                    />
-                    <label
-                      htmlFor='remember-me'
-                      className='ml-2 block text-sm text-gray-900'>
-                      I accept the terms and conditions.
-                    </label>
-                  </div>
-
-                  {/* <div className='text-sm'>
-                <a
-                  href='#'
-                  className='font-medium text-indigo-600 hover:text-indigo-500'>
-                  Forgot your password?
-                </a>
-              </div> */}
                 </div>
 
                 <div>

@@ -1,6 +1,12 @@
 import Type from "../action/Type";
 
-const { CREATE_PRODUCT, DELETE_PRODUCT, FETCH_PRODUCTS, EDIT_PRODUCT } = Type;
+const {
+  CREATE_PRODUCT,
+  DELETE_PRODUCT,
+  FETCH_PRODUCTS,
+  EDIT_PRODUCT,
+  FETCH_PRODUCT
+} = Type;
 
 const productReducer = (state = {}, action) => {
   switch (action.type) {
@@ -14,6 +20,8 @@ const productReducer = (state = {}, action) => {
         product: state.product.filter(product => product !== action.payload)
       };
     case EDIT_PRODUCT:
+      return { ...state, product: action.payload };
+    case FETCH_PRODUCT:
       return { ...state, product: action.payload };
     default:
       return state;
