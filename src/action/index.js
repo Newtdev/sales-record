@@ -16,7 +16,9 @@ const {
 } = Type;
 
 const Auth = async () => {
-  await supabase.auth.onAuthStateChange((event, session) => {});
+  await supabase.auth.onAuthStateChange((event, session) => {
+    console.log(session);
+  });
 };
 
 export const signUp = (username, email, password) => async dispatch => {
@@ -33,7 +35,6 @@ export const signIN = (email, password) => async dispatch => {
   const response = await supabase.auth.signIn({
     email,
     password
-    // redirectTo: `https://waresrecords.vercel.app/dashboard/${response.user.id}`
   });
   dispatch({ type: SIGN_IN, payload: response });
   Auth();
@@ -55,11 +56,11 @@ export const googleAuth = () => async dispatch => {
       provider: "google"
     },
     {
-      redirectTo: "https://waresrecords.vercel.app/"
+      redirectTo: `https://waresrecords.vercel.app/`
     }
   );
+  Auth();
 
-  console.log(user, session.error);
   dispatch({ type: GOOGLE_AUTH, payload: session });
 };
 
