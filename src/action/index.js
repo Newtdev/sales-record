@@ -57,6 +57,9 @@ export const googleAuth = () => async dispatch => {
     },
     {
       redirectTo: `https://waresrecords.vercel.app/`
+    },
+    {
+      scope: "email"
     }
   );
   Auth();
