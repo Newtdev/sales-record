@@ -51,18 +51,20 @@ export const signOut = () => async dispatch => {
 
 export const googleAuth = () => async dispatch => {
   const res = await supabase.auth.signIn({
-    provider: "google"
+    provider: "google",
+    redirectTo: "https://waresrecords.vercel.app/Signup"
   });
+  console.log(res);
   dispatch({ type: GOOGLE_AUTH, payload: res });
 
-  if (!res.error) {
-    History.push(`/dashboard/${res.user.id}`);
-  }
+  // if (!res.error) {
+  //   History.push(`/dashboard/${res.user.id}`);
+  // }
 };
 
 export const resetPassword = email => async dispatch => {
   const res = await supabase.auth.api.resetPasswordForEmail(email, {
-    redirectTo: "waresrecords.vercel.app/password/new"
+    redirectTo: "https://waresrecords.vercel.app/password/new"
   });
   dispatch({ type: RESET_PASSWORD, payload: res });
 };
