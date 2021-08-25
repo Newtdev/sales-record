@@ -14,8 +14,6 @@ const NewPassword = props => {
     const res = props.location.hash.split("&")[0].slice(14);
 
     setToken(res);
-
-    console.log(res);
   }, []);
 
   const submit = () => {

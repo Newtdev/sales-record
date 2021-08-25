@@ -6,18 +6,20 @@ import Header from "../Header";
 import { fetchProduct } from "../../action";
 import SalesDetails from "./SalesDetails";
 
-const Daily = ({ state, fetchProduct }) => {
+const Daily = ({ state, fetchProduct, match, productDetails }) => {
+  const numb = Math.floor(match.params.id);
+  const { cost, sell, quantity } = productDetails;
   useEffect(() => {
-    fetchProduct();
-  });
+    fetchProduct(numb);
+  }, []);
 
   const costCal = () => {
-    const number = state.quantity * state.cost;
+    const number = quantity * cost;
     return new Intl.NumberFormat().format(number);
   };
 
   const calcSales = () => {
-    const number = state.quantity * state.sell;
+    const number = quantity * sell;
     return new Intl.NumberFormat().format(number);
   };
 
@@ -33,7 +35,7 @@ const Daily = ({ state, fetchProduct }) => {
       <div className='h-60 w-screen py-4 flex items-center justify-start overflow-x-auto '>
         <ProductTotals>
           {"Supplied Quantity"}
-          {state.quantity}
+          {quantity}
           {"pcs"}
         </ProductTotals>
         <ProductTotals>
@@ -48,10 +50,9 @@ const Daily = ({ state, fetchProduct }) => {
         </ProductTotals>
         <ProductTotals>
           {"Total Sales"}
-          {/* {currencySymbol} */}
+          {currencySymbol}
           {0}
         </ProductTotals>
-        {/* <ProductTotals supplied={state.quantity}></ProductTotals> */}
       </div>
       <div>
         <SalesForm />
@@ -62,8 +63,11 @@ const Daily = ({ state, fetchProduct }) => {
   );
 };
 //Math.floor(ownprops.match.params.id)
-const mapStateToProps = (state, ownprops) => {
-  return { productDetails: state.ProductReducer };
+const mapStateToProps = state => {
+  const [product] = state.ProductReducer.product;
+  return { productDetails: product };
 };
 
 export default connect(mapStateToProps, { fetchProduct })(Daily);
+
+// sk on https://github.com/supabase/supabase/discussions or support@supabase.com

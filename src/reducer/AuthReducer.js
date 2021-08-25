@@ -1,6 +1,13 @@
 import Type from "../action/Type";
 
-const { SIGN_IN, SIGN_OUT, RESET_PASSWORD, NEW_PASSWORD, SIGN_UP } = Type;
+const {
+  SIGN_IN,
+  SIGN_OUT,
+  RESET_PASSWORD,
+  NEW_PASSWORD,
+  SIGN_UP,
+  GOOGLE_AUTH
+} = Type;
 
 const INITAL_STATE = {
   signIn: null,
@@ -19,6 +26,8 @@ const AuthReducer = (state = INITAL_STATE, action) => {
       return { ...state, signOut: action.payload };
     case RESET_PASSWORD:
       return { ...state, reset_password: action.payload };
+    case GOOGLE_AUTH:
+      return { ...state, signIn: action.payload };
     case NEW_PASSWORD:
       return { ...state, NEW_PASSWORD: action.payload };
     default:

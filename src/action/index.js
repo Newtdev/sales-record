@@ -1,7 +1,6 @@
 import supabase from "../supabase/Supabase";
 import History from "../History";
 import Type from "./Type";
-import axios from "axios";
 const {
   SIGN_IN,
   SIGN_OUT,
@@ -24,13 +23,18 @@ export const signUp = (username, email, password) => async dispatch => {
   const res = await supabase.auth.signUp({
     username: `${username}`,
     email: `${email}`,
-    password: `${password}`
+    password: `${password}`,
+    redirectTo: "https://waresrecords.vercel.app"
   });
   dispatch({ type: SIGN_UP, payload: res.user });
 };
 
 export const signIN = (email, password) => async dispatch => {
-  const response = await supabase.auth.signIn({ email, password });
+  const response = await supabase.auth.signIn({
+    email,
+    password
+    // redirectTo: `https://waresrecords.vercel.app/dashboard/${response.user.id}`
+  });
   dispatch({ type: SIGN_IN, payload: response });
   Auth();
   if (!response.error) {
@@ -49,13 +53,16 @@ export const googleAuth = () => async dispatch => {
   const res = await supabase.auth.signIn({
     provider: "google"
   });
-  console.log(res);
-  // dispatch({ type: GOOGLE_AUTH, payload: res });
+  dispatch({ type: GOOGLE_AUTH, payload: res });
+
+  if (!res.error) {
+    History.push(`/dashboard/${res.user.id}`);
+  }
 };
 
 export const resetPassword = email => async dispatch => {
   const res = await supabase.auth.api.resetPasswordForEmail(email, {
-    redirectTo: "http://waresrecords/password/new"
+    redirectTo: "waresrecords.vercel.app/password/new"
   });
   dispatch({ type: RESET_PASSWORD, payload: res });
 };
@@ -124,6 +131,6 @@ export const fetchProduct = id => async dispatch => {
   const res = await supabase
     .from("sales")
     .select("*")
-    .eq("id", `${id}`);
+    .eq("id", id);
   dispatch({ type: FETCH_PRODUCT, payload: res.data });
 };
