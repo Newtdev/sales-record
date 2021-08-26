@@ -13,15 +13,16 @@ const {
   FETCH_PRODUCT,
   EDIT_PRODUCT,
   GOOGLE_SIGNIN,
-  GOOGLE_SIGNOUT
+  GOOGLE_SIGNOUT,
+  GOOGLE_AUTH
 } = Type;
 
 export const googleSignIn = userId => {
-  History.push(`/dashboard/${userId}`);
   return {
     type: GOOGLE_SIGNIN,
     payLoad: userId
   };
+  // History.push(`/dashboard/${userId}`);
 };
 
 export const googleSignOut = () => {
@@ -65,22 +66,22 @@ export const signOut = () => async dispatch => {
   Auth();
 };
 
-// export const googleAuth = () => async dispatch => {
-//   const { user, session, error } = await supabase.auth.signIn(
-//     {
-//       provider: "google"
-//     },
-//     {
-//       redirectTo: `https://waresrecords.vercel.app/`
-//     },
-//     {
-//       scope: "email"
-//     }
-//   );
-//   Auth();
+export const googleAuth = () => async dispatch => {
+  const { user, session, error } = await supabase.auth.signIn(
+    {
+      provider: "google"
+    },
+    // {
+    //   redirectTo: `https://waresrecords.vercel.app/`
+    // },
+    {
+      scope: "email"
+    }
+  );
+  // Auth();
 
-//   dispatch({ type: GOOGLE_AUTH, payload: session });
-// };
+  dispatch({ type: GOOGLE_AUTH, payload: session });
+};
 
 export const resetPassword = email => async dispatch => {
   const res = await supabase.auth.api.resetPasswordForEmail(email, {

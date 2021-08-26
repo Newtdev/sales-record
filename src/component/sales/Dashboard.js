@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signIN } from "../../action";
-// import Sidebar from "./Sidebar";
+import supabase from "../../supabase/Supabase";
 import DashboardHeader from "./DashboardHeader";
 import hamburger from "../../assets/hamburger.svg";
 import User from "./User";
@@ -9,6 +9,12 @@ import History from "../../History";
 
 class Dashboard extends React.Component {
   state = { clicked: false };
+
+  Auth = async () => {
+    await supabase.auth.onAuthStateChange((event, session) => {
+      console.log(session);
+    });
+  };
 
   render() {
     if (!this.props.session) {
