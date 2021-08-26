@@ -15,6 +15,19 @@ const {
   GOOGLE_AUTH
 } = Type;
 
+export const googleSignIn = userId => {
+  return {
+    type: SIGN_IN,
+    payLoad: userId
+  };
+};
+
+export const googleSignOut = () => {
+  return {
+    type: SIGN_OUT
+  };
+};
+
 const Auth = async () => {
   await supabase.auth.onAuthStateChange((event, session) => {});
 };
