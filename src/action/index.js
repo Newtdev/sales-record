@@ -20,7 +20,7 @@ const {
 export const googleSignIn = userId => {
   return {
     type: GOOGLE_SIGNIN,
-    payLoad: userId
+    payload: userId
   };
   // History.push(`/dashboard/${userId}`);
 };
