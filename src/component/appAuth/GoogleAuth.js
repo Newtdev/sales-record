@@ -1,34 +1,34 @@
 import React from "react";
 import google from "../../assets/google.svg";
 import { connect } from "react-redux";
-import { googleSignIn, googleSignOut, googleAuth } from "../../action";
+import { googleSignIn, googleSignOut } from "../../action";
 
 class GoogleAuth extends React.Component {
-  // componentDidMount() {
-  //   window.gapi.load("client:auth2", () => {
-  //     window.gapi.client
-  //       .init({
-  //         clientId:
-  //           "405308254558-21b2osv6i2an21vh0oh3t92rpf0ocff0.apps.googleusercontent.com",
-  //         scope: "email"
-  //       })
-  //       .then(() => {
-  //         this.auth = window.gapi.auth2.getAuthInstance();
-  //         this.onAuthChange(this.auth.isSignedIn.get());
-  //         this.auth.isSignedIn.listen(this.onAuthChange);
-  //       });
-  //   });
-  // }
-  // onAuthChange = isSignedIn => {
-  //   if (isSignedIn) {
-  //     this.props.googleSignIn(this.auth.currentUser.get().getId());
-  //   } else {
-  //     this.props.googleSignOut();
-  //   }
-  // };
+  componentDidMount() {
+    window.gapi.load("client:auth2", () => {
+      window.gapi.client
+        .init({
+          clientId:
+            "405308254558-21b2osv6i2an21vh0oh3t92rpf0ocff0.apps.googleusercontent.com",
+          scope: "email"
+        })
+        .then(() => {
+          this.auth = window.gapi.auth2.getAuthInstance();
+          this.onAuthChange(this.auth.isSignedIn.get());
+          this.auth.isSignedIn.listen(this.onAuthChange);
+        });
+    });
+  }
+  onAuthChange = isSignedIn => {
+    if (isSignedIn) {
+      this.props.googleSignIn(this.auth.currentUser.get().getId());
+    } else {
+      this.props.googleSignOut();
+    }
+  };
 
   getAuth = () => {
-    this.props.googleAuth();
+    this.auth.signIn();
   };
 
   render() {
@@ -43,6 +43,4 @@ class GoogleAuth extends React.Component {
   }
 }
 
-export default connect(null, { googleSignIn, googleSignOut, googleAuth })(
-  GoogleAuth
-);
+export default connect(null, { googleSignIn, googleSignOut })(GoogleAuth);

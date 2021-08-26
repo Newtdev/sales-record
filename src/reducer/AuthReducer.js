@@ -7,7 +7,8 @@ const {
   NEW_PASSWORD,
   SIGN_UP,
   GOOGLE_SIGNIN,
-  GOOGLE_SIGNOUT
+  GOOGLE_SIGNOUT,
+  GOOGLE_AUTH
 } = Type;
 
 const INITAL_STATE = {
@@ -15,7 +16,8 @@ const INITAL_STATE = {
   signOut: false,
   reset_password: null,
   signUp: null,
-  googleSignIn: null
+  googleSignIn: null,
+  googleAuth: null
 };
 
 const AuthReducer = (state = INITAL_STATE, action) => {
@@ -30,6 +32,8 @@ const AuthReducer = (state = INITAL_STATE, action) => {
       return { ...state, googleSignIn: action.payload };
     case RESET_PASSWORD:
       return { ...state, reset_password: action.payload };
+    case GOOGLE_AUTH:
+      return { ...state, googleAuth: action.payload };
     case NEW_PASSWORD:
       return { ...state, NEW_PASSWORD: action.payload };
     default:
