@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signIN } from "../../action";
@@ -6,11 +6,14 @@ import Header from "../Header";
 import propTypes from "prop-types";
 import GoogleAuth from "./GoogleAuth";
 import business from "../../assets/Business.svg";
+import { ifStatement } from "@babel/types";
 
 const Login = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [serverErr, setServerErr] = useState("");
 
   const onEmailChange = e => {
     setEmail(e.target.value);
@@ -20,20 +23,22 @@ const Login = props => {
     setPassword(e.target.value);
   };
 
-  // const renderError = () => {
-  //   if (props.error) {
-  //     return (
-  //       <p className='text-red-500 text-xs italic'>
-  //         {props.error.error.message}
-  //       </p>
-  //     );
-  //   } else {
-  //     return null;
-  //   }
-  // };
+  useEffect(() => {
+    setLoading(true);
+    const id = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+    return () => {
+      clearTimeout(id);
+    };
+  });
+  const renderError = () => {
+    if (props.error) return props.error.error.message;
+  };
 
   const onUserSubmit = e => {
     e.preventDefault();
+
     if (!email) {
       setError("Email addresss must be provided");
     } else if (!password) {
@@ -44,7 +49,7 @@ const Login = props => {
   };
 
   const errborder = error ? "border-red-500" : "";
-
+  // if (!props.error)
   return (
     <div className='h-screen bg-gradient-to-r from-purple-700 via-purple-800 to-purple-900 overflow-hidden'>
       <div className='shadow-md'>
@@ -115,16 +120,24 @@ const Login = props => {
                   value={password}
                   onChange={onPasswordChange}
                 />
-                {/* {renderError() || ( */}
-                <p className='text-red-500 text-xs italic'>{error}</p>
-                {/* )} */}
+                {
+                  <p className='text-red-500 text-sm heading italic'>
+                    {error || renderError()}
+                  </p>
+                }
               </div>
               <div className='flex items-center sm:justify-between'>
                 <button
                   name='Sign In'
-                  className='bg-indigo-800 hover:bg-indigo-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4 sm:mr-0'
+                  className='bg-indigo-800 hover:bg-indigo-900 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline mr-4 sm:mr-0'
                   type='submit'>
+                  {!loading ? null : (
+                    <i className='fa fa-spinner fa-spin mr-2'></i>
+                  )}
                   Login
+                  {/* <button class='buttonload'>
+                   Loading
+                  </button> */}
                   {/* <div class=' flex justify-center items-center'>
                     <div class='animate-spin rounded-full h-2 w-3 border-t-2 border-b-2 border-purple-500'></div>
                   </div> */}
@@ -148,7 +161,6 @@ const Login = props => {
 const mapStateToProps = state => {
   return {
     error: state.AuthReducer.signIn
-    // signed: state.AuthReducer.signIn
   };
 };
 
@@ -157,3 +169,13 @@ Login.propTypes = {
 };
 
 export default connect(mapStateToProps, { signIN })(Login);
+
+/**
+ * .buttonload {
+  background-color: #04AA6D; /* Green background 
+  border: none; /* Remove borders 
+  color: white; /* White text 
+  padding: 12px 16px; /* Some padding 
+  font-size: 16px /* Set a font size 
+}
+ */

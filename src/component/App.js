@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Router } from "react-router-dom";
 import Login from "./appAuth/Login";
 import Signup from "./appAuth/Signup";
@@ -6,11 +6,21 @@ import Dashboard from "./sales/Dashboard";
 import PasswordRest from "./appAuth/PasswordReset";
 import NewPassword from "./appAuth/NewPassword";
 import Daily from "./dailysales/Daily";
+import supabase from "../supabase/Supabase";
+
 import ConfirmationMessage from "./appAuth/ConfimationMessage";
 import NewProduct from "./sales/NewProduct";
 import History from "../History";
 
 const App = () => {
+  const Auth = async () => {
+    await supabase.auth.onAuthStateChange((event, session) => {
+      History.push(`/dashboard/${session.user.id}`);
+    });
+  };
+  useEffect(() => {
+    Auth();
+  }, []);
   return (
     <div className='overflow-x-hidden bg-purple-100'>
       <Router history={History}>
@@ -18,7 +28,7 @@ const App = () => {
           <Route path='/' exact component={Login}></Route>
           <Route path='/Signup' exact component={Signup}></Route>
           <Route path='/dashboard/:user_id' exact component={Dashboard}></Route>
-          <Route path='/product/new' exact component={NewProduct}></Route>
+          <Route path='/product/new/:id' exact component={NewProduct}></Route>
           <Route path='/password/reset' exact component={PasswordRest}></Route>
           <Route path='/password/new' exact component={NewPassword}></Route>
           <Route

@@ -1,25 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signIN } from "../../action";
-import supabase from "../../supabase/Supabase";
 import DashboardHeader from "./DashboardHeader";
-import hamburger from "../../assets/hamburger.svg";
+// import hamburger from "../../assets/hamburger.svg";
 import User from "./User";
-import History from "../../History";
 
 class Dashboard extends React.Component {
   state = { clicked: false };
 
-  Auth = async () => {
-    await supabase.auth.onAuthStateChange((event, session) => {
-      console.log(session);
-    });
-  };
-
   render() {
-    if (!this.props.session) {
-      History.push("/");
-    }
     return (
       <div className='dashboard-container w-screen h-screen bg-purple-100'>
         {/* <div>
@@ -33,7 +22,7 @@ class Dashboard extends React.Component {
           />
         </div> */}
         <div>
-          <DashboardHeader />
+          <DashboardHeader userid={this.props.location.pathname} />
           <div className='w-full h-full flex justify-evenly items-center'>
             {/* <div
               className={`${!this.state.clicked ? "active" : "slide"}  h-screen

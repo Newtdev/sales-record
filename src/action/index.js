@@ -11,31 +11,8 @@ const {
   DELETE_PRODUCT,
   FETCH_PRODUCTS,
   FETCH_PRODUCT,
-  EDIT_PRODUCT,
-  GOOGLE_SIGNIN,
-  GOOGLE_SIGNOUT,
-  GOOGLE_AUTH
+  EDIT_PRODUCT
 } = Type;
-
-export const googleSignIn = userId => {
-  return {
-    type: GOOGLE_SIGNIN,
-    payload: userId
-  };
-  // History.push(`/dashboard/${userId}`);
-};
-
-export const googleSignOut = () => {
-  return {
-    type: GOOGLE_SIGNOUT
-  };
-};
-
-const Auth = async () => {
-  await supabase.auth.onAuthStateChange((event, session) => {
-    console.log(session);
-  });
-};
 
 export const signUp = (username, email, password) => async dispatch => {
   const res = await supabase.auth.signUp({
@@ -53,7 +30,6 @@ export const signIN = (email, password) => async dispatch => {
     password
   });
   dispatch({ type: SIGN_IN, payload: response });
-  Auth();
   if (!response.error) {
     History.push(`/dashboard/${response.user.id}`);
   }
@@ -63,25 +39,18 @@ export const signOut = () => async dispatch => {
   await supabase.auth.signOut();
   History.push("/");
   dispatch({ type: SIGN_OUT });
-  Auth();
 };
 
-// export const googleAuth = () => async dispatch => {
-//   const { user, session, error } = await supabase.auth.signIn(
-//     {
-//       provider: "google"
-//     },
-//     // {
-//     //   redirectTo: `https://waresrecords.vercel.app/`
-//     // },
-//     {
-//       scope: "email"
-//     }
-//   );
-//   // Auth();
-
-//   dispatch({ type: GOOGLE_AUTH, payload: session });
-// };
+export const googleAuth = () => async dispatch => {
+  await supabase.auth.signIn(
+    {
+      provider: "google"
+    },
+    {
+      scope: "email"
+    }
+  );
+};
 
 export const resetPassword = email => async dispatch => {
   const res = await supabase.auth.api.resetPasswordForEmail(email, {
@@ -102,7 +71,7 @@ export const updatePassword = (
   if (!error) History.push("/password/updated");
 };
 
-export const createProduct = values => async (dispatch, getState) => {
+export const createProduct = (values, userId) => async dispatch => {
   const { productName, suppliedQuantity, costPrice, sellingPrice } = values;
 
   const res = await supabase.from("sales").insert([
@@ -111,11 +80,11 @@ export const createProduct = values => async (dispatch, getState) => {
       quantity: `${suppliedQuantity}`,
       cost: `${costPrice}`,
       sell: `${sellingPrice}`,
-      userid: getState().AuthReducer.signIn.user.id
+      userid: `${userId}`
     }
   ]);
   dispatch({ type: CREATE_PRODUCT, payload: res.data });
-  History.push(`/dashboard/${getState().AuthReducer.signIn.user.id}`);
+  History.push(`/dashboard/${userId}`);
 };
 
 export const fetchProducts = id => async dispatch => {

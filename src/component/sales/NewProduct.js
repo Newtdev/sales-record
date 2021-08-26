@@ -6,8 +6,9 @@ import History from "../../History";
 import Header from "../Header";
 
 const NewProduct = props => {
+  const userid = props.location.pathname.split("/")[3];
   const createAction = values => {
-    props.createProduct(values);
+    props.createProduct(values, userid);
   };
 
   const button = () => {

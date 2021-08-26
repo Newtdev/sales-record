@@ -56,7 +56,7 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
               setActive(true);
               setProductId(product.id);
             }}
-            // to={`/product/${product.name}/${product.id}`}
+            to={`/product/${product.name}/${product.id}`}
             className='block w-full py-3 rounded px-4 align-baseline text-center text-md text-white bg-red-600 hover:bg-red-600 mt-4 shadow-lg'>
             Delete
           </button>
@@ -69,10 +69,8 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
   const RenderProduct = () => {
     const productCard = Product.map(product => {
       return (
-        <div className='mr-2'>
-          <div
-            key={product.id}
-            className='product-card h-73 pb-6 sm:mx-0 rounded-md shadow-lg bg-gray-50 border border-indigo-700 mb-4 '>
+        <div key={product.id} className='mr-2'>
+          <div className='product-card h-73 pb-6 sm:mx-0 rounded-md shadow-lg bg-gray-50 border border-indigo-700 mb-4 '>
             <div className='h-full w-full px-4 py-2'>
               <div
                 id='product-name'
