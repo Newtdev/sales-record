@@ -16,10 +16,12 @@ const {
 } = Type;
 
 export const googleSignIn = userId => {
+  console.log(userId)
   return {
     type: SIGN_IN,
     payLoad: userId
   };
+
 };
 
 export const googleSignOut = () => {
