@@ -24,12 +24,7 @@ const SalesForm = props => {
         className={`ml-2 w-full pb-5 `}
         onSubmit={props.handleSubmit(Submit)}>
         <div className='w-full px-6 h-4/5 mx-auto py-4'>
-          <div className='w-full flex items-center'>
-            <div className='col-span-6 sm:col-span-4 mr-2'>
-              <div className='py-2 px-8 bg-white heading text-gray-600 rounded-sm'>
-                Date
-              </div>
-            </div>
+          <div className='w-3/5 mx-auto flex items-center justify-evenly'>
             <div className='col-span-6 sm:col-span-4 mr-2'>
               <Field
                 component={renderInput}
@@ -55,15 +50,6 @@ const SalesForm = props => {
                 name='Quantity'
                 id='supplied'
                 productLabel='Quantity'
-              />
-            </div>
-            <div className='col-span-6 sm:col-span-4 mr-2'>
-              <Field
-                component={renderInput}
-                type='text'
-                name='Discount'
-                id='discount'
-                productLabel='Discount'
               />
             </div>
 
