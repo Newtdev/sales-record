@@ -131,7 +131,7 @@ const Login = props => {
                   name='Sign In'
                   className='bg-indigo-800 hover:bg-indigo-900 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline mr-4 sm:mr-0'
                   type='submit'>
-                  {!loading ? null : (
+                  {loading ? null : (
                     <i className='fa fa-spinner fa-spin mr-2'></i>
                   )}
                   Login
