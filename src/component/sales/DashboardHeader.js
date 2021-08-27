@@ -1,22 +1,17 @@
 import React from "react";
 import Header from "../Header";
-import CreateButton from "./CreateButton";
 // import SignOut from "./SignOut";
 
 const DashboardHeader = props => {
-  const user_id = props.userid.split("/")[2];
-
   return (
     <div className='w-screen'>
       <div className='w-full h-16 mx-auto flex items-center justify-between bg-purple-800 shadow-md'>
         <Header></Header>
         <div className='h-full w-72 sm:w-52 ml-10 ml-auto flex items-center justify-around'>
-          <CreateButton name={"Create Product"} userid={user_id} />
-          {/* <div className='w-64 mr-3 flex items-center justify-start '> */}
-          {/* </div> */}
-          {/* <SignOut /> */}
-          {/* <div className=''>
+          {/* <div className='w-36 flex items-center justify-center '>
+            <SignOut />
           </div> */}
+
           {/* <Link to='/' className='text-3xl font-extrabold text-white'>
             WDS
           </Link> */}

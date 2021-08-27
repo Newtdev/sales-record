@@ -71,6 +71,12 @@ const Modal = props => {
                 </h3>
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>{props.description}</p>
+                  <p className='text-md text-gray-500'>{props.create}</p>
+                  <p className='text-md text-gray-500'>{props.name}</p>
+                  <p className='text-md text-gray-500'>{props.price}</p>
+                  <p className='text-md text-gray-500'>{props.quantity}</p>
+                  <p className='text-md text-gray-500'>{props.sales}</p>
+                  <p className='text-md text-gray-500'>{props.open}</p>
                   <div className='mt-4'>{props.input}</div>
                 </div>
               </div>

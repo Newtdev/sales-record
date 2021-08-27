@@ -5,6 +5,7 @@ import { fetchProducts } from "../../action";
 import Loader from "../Loader";
 import DeleteProduct from "./DeleteProduct";
 import EditProduct from "./EditProduct";
+import CreateButton from "./CreateButton";
 
 const ProductList = ({ fetchProducts, Product, user_id }) => {
   const [loading, setLoading] = useState(false);
@@ -133,6 +134,9 @@ const ProductList = ({ fetchProducts, Product, user_id }) => {
 
   return (
     <div className='product-list w-full max-w-6xl flex justify-center sm:justify-start items-center flex-wrap mx-auto sm:mx-0 '>
+      <div className=' w-72 h-96 flex justify-center items-center'>
+        <CreateButton userid={user_id} />
+      </div>
       {!loading ? <Loader /> : RenderProduct()}
 
       {!active ? null : <DeleteProduct productId={productId} print={print} />}

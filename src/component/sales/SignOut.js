@@ -5,7 +5,7 @@ import { signOut } from "../../action";
 const SignOut = props => {
   return (
     <button
-      className='mt-3 w-full block rounded-md shadow-lg bg-red-600 text-base py-2 px-4 mx-auto text-center font-medium text-white font-bold hover:bg-red-700 focus:outline-none'
+      className='mt-3 w-full block rounded-sm shadow-lg bg-gray-200 text-base py-3 px-4 mx-auto text-center text-red-600 font-bold hover:bg-red-600 hover:text-white focus:outline-none'
       onClick={() => {
         props.signOut();
       }}>

@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { signIN } from "../../action";
 import DashboardHeader from "./DashboardHeader";
+import WelcomeMessage from "./WelcomeMessage";
 // import hamburger from "../../assets/hamburger.svg";
 import User from "./User";
 
-class Dashboard extends React.Component {
-  state = { clicked: false };
+const Dashboard = props => {
+  const [show, setShow] = useState(false);
 
-  render() {
-    return (
-      <div className='dashboard-container w-screen h-screen bg-purple-100'>
-        {/* <div>
+  const closeModal = () => {
+    setShow(false);
+  };
+  return (
+    <div className='dashboard-container w-screen h-screen bg-purple-100'>
+      {/* <div>
           <img
             src={hamburger}
             alt='menu'
@@ -19,24 +22,24 @@ class Dashboard extends React.Component {
             onClick={() => {
               this.setState({ clicked: true });
             }}
-          />
+            />
         </div> */}
-        <div>
-          <DashboardHeader userid={this.props.location.pathname} />
-          <div className='w-full h-full flex justify-evenly items-center'>
-            {/* <div
+      <div>
+        <DashboardHeader />
+        <div className='w-full h-full flex justify-evenly items-center'>
+          {/* <div
               className={`${!this.state.clicked ? "active" : "slide"}  h-screen
               w-72
               bg-red-200`}>
               <Sidebar />
             </div> */}
-            <User id={this.props.location.pathname} />
-          </div>
+          <User id={props.location.pathname} />
+          {/* {show ? null : <WelcomeMessage close={closeModal} />} */}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = state => {
   return { user: state.AuthReducer.signIn, session: state.AuthReducer.signIn };

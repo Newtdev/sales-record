@@ -16,6 +16,7 @@ const App = () => {
   const Auth = async () => {
     await supabase.auth.onAuthStateChange((event, session) => {
       History.push(`/dashboard/${session.user.id}`);
+      // History.push("/");
     });
   };
   useEffect(() => {
