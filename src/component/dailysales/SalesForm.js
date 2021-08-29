@@ -24,7 +24,7 @@ const SalesForm = props => {
         className={`ml-2 w-full pb-5 `}
         onSubmit={props.handleSubmit(Submit)}>
         <div className='w-full px-6 h-4/5 mx-auto py-4'>
-          <div className='w-3/5 mx-auto flex items-center justify-evenly'>
+          <div className='w-4/5 mx-auto flex items-center justify-evenly'>
             <div className='col-span-6 sm:col-span-4 mr-2'>
               <Field
                 component={renderInput}

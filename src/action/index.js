@@ -59,7 +59,6 @@ export const signOut = () => async dispatch => {
   await supabase.auth.signOut();
   History.push("/");
   dispatch({ type: SIGN_OUT });
-  Auth();
 };
 
 export const googleAuth = () => async dispatch => {
@@ -67,10 +66,6 @@ export const googleAuth = () => async dispatch => {
     provider: "google"
   });
   dispatch({ type: GOOGLE_AUTH, payload: res });
-
-  if (!res.error) {
-    History.push(`/dashboard/${res.user.id}`);
-  }
 };
 
 export const resetPassword = email => async dispatch => {

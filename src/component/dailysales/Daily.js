@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import ProductTotals from "./ProductTotals";
 import SalesForm from "./SalesForm";
@@ -7,6 +7,48 @@ import { fetchProduct } from "../../action";
 import SalesDetails from "./SalesDetails";
 
 const Daily = ({ state, fetchProduct, match, productDetails }) => {
+  const records = [
+    {
+      id: 1,
+      quantity: 5,
+      name: "Coke",
+      sell: 1100,
+      total: function sumTotal() {
+        return this.quantity * this.sell;
+      },
+      date: new Date().toLocaleDateString()
+    },
+    {
+      id: 2,
+      quantity: 5,
+      name: "Pepsi",
+      sell: 1100,
+      total: function sumTotal() {
+        return this.quantity * this.sell;
+      },
+      date: new Date().toLocaleDateString()
+    },
+    {
+      id: 3,
+      quantity: 2,
+      name: "Soap",
+      sell: 1100,
+      total: function sumTotal() {
+        return this.quantity * this.sell;
+      },
+      date: new Date().toLocaleDateString()
+    },
+    {
+      id: 4,
+      quantity: 5,
+      name: "wine",
+      sell: 1100,
+      total: function sumTotal() {
+        return this.quantity * this.sell;
+      },
+      date: new Date().toLocaleDateString()
+    }
+  ];
   const numb = Math.floor(match.params.id);
   const { cost, sell, quantity } = productDetails;
   useEffect(() => {
@@ -29,8 +71,20 @@ const Daily = ({ state, fetchProduct, match, productDetails }) => {
     </small>
   );
 
+  const sum = records.map(cur => {
+    return cur.total();
+  });
+
+  const adding = sum.reduce((acc, cur) => {
+    return acc + cur;
+  }, 0);
+
+  const currencyFormat = total => {
+    return new Intl.NumberFormat().format(total);
+  };
+
   return (
-    <div className='h-screen w-screen bg-red-800'>
+    <div className='min-h-full w-screen bg-red-800'>
       <Header />
       <div className='h-60 w-screen py-4 flex items-center justify-start overflow-x-auto '>
         <ProductTotals>
@@ -51,12 +105,12 @@ const Daily = ({ state, fetchProduct, match, productDetails }) => {
         <ProductTotals>
           {"Total Sales"}
           {currencySymbol}
-          {0}
+          {currencyFormat(adding)}
         </ProductTotals>
       </div>
       <div>
         <SalesForm />
-        <SalesDetails />
+        <SalesDetails records={records} />
       </div>
     </div>
     // </div>
